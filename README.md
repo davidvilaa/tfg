@@ -23,7 +23,7 @@ The core of TrophyD is not just tracking what you play, but **building the ultim
   <br>
   Interactive visual representation through 3D cards rendered directly in the browser via WebGL, simulating original game hardware (PS5, N64, GameBoy, Switch, etc.).
   <br><br>
-  <img src="https://i.ibb.co/3YV04KwB/loggggg.gif" alt="3D Demo">
+  <img src="https://github.com/user-attachments/assets/c91227dd-e7c7-4000-958e-a30065564ffe" alt="3D Demo">
 </details>
 
 <details>
@@ -31,7 +31,7 @@ The core of TrophyD is not just tracking what you play, but **building the ultim
   <br>
   Log your 100% completed games, rate titles, and build a network of followers and following.
   <br><br>
-  <img src="https://github.com/user-attachments/assets/c74caab0-9a41-4edc-8ca2-0330f100f2ab" alt="Social Demo">
+  <img src="https://github.com/user-attachments/assets/96f23551-6e1b-4020-bc73-737a44ee33f3" alt="Social Demo">
 </details>
 
 <details>
@@ -39,7 +39,7 @@ The core of TrophyD is not just tracking what you play, but **building the ultim
   <br>
   Write and share detailed guides and checklists to help other trophy hunters in their playthroughs.
   <br><br>
-  <img src="link_a_tu_gif_Collaboration" alt="Collaboration Demo">
+  <img src="https://github.com/user-attachments/assets/cfad8e69-3650-4373-914a-dcabe5655077" alt="Collaboration Demo">
 </details>
 
 <!--![Search and 3D Interaction Showcase](link_to_search_and_3d_gif_here)--->

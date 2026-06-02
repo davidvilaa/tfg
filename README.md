@@ -31,7 +31,7 @@ The core of TrophyD is not just tracking what you play, but **building the ultim
   <br>
   Log your 100% completed games, rate titles, and build a network of followers and following.
   <br><br>
-  <img src="link_a_tu_gif_Social" alt="Social Demo">
+  <img src="https://i.ibb.co/gbgQTPNX/social.gif" alt="Social Demo">
 </details>
 
 <details>

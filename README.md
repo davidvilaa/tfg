@@ -19,31 +19,28 @@ The core of TrophyD is not just tracking what you play, but **building the ultim
 ### Key Features
 
 <details>
-  <summary><strong>Immersive 3D Experience</strong></summary>
+  <summary><strong>🎮 Immersive 3D Experience</strong></summary>
   <br>
   Interactive visual representation through 3D cards rendered directly in the browser via WebGL, simulating original game hardware (PS5, N64, GameBoy, Switch, etc.).
   <br><br>
-  <video src="https://github.com/user-attachments/assets/c91227dd-e7c7-4000-958e-a30065564ffe" autoplay loop muted playsinline width="100%"></video>
+  <img src="https://github.com/user-attachments/assets/08f8d2b3-d378-41f0-8a23-3aed45a8dba0" alt="3D Interactive Cards" width="100%">
 </details>
 
 <details>
-  <summary><strong>Social Interaction</strong></summary>
+  <summary><strong>👥 Social Interaction</strong></summary>
   <br>
   Log your 100% completed games, rate titles, and build a network of followers and following.
   <br><br>
-  <video src="https://github.com/user-attachments/assets/96f23551-6e1b-4020-bc73-737a44ee33f3" autoplay loop muted playsinline width="100%"></video>
+  <img src="https://github.com/user-attachments/assets/2bfa9d14-5e51-4d3b-967e-f2f8dc0a5859" alt="Social Interaction" width="100%">
 </details>
 
 <details>
-  <summary><strong>Collaboration</strong></summary>
+  <summary><strong>🤝 Collaboration</strong></summary>
   <br>
   Write and share detailed guides and checklists to help other trophy hunters in their playthroughs.
   <br><br>
-  <video src="https://github.com/user-attachments/assets/cfad8e69-3650-4373-914a-dcabe5655077" autoplay loop muted playsinline width="100%"></video>
-  
+  <img src="https://github.com/user-attachments/assets/710e2d54-599e-42c2-899e-278e137acbc5" alt="Guide Creation" width="100%">
 </details>
-
-<!--![Search and 3D Interaction Showcase](link_to_search_and_3d_gif_here)--->
 
 ---
 

@@ -1,3 +1,5 @@
+<!-- foto banner collage de la app-->
+
 # 🏆 TrophyD: The Completionist Social Network
 
 <p align="center">
@@ -12,35 +14,45 @@ This repository contains the source code and development environment for **Troph
 
 ## What is TrophyD?
 
-**TrophyD** is a web platform that merges activity tracking concepts (similar to *Letterboxd*) with guide and completionist mechanics (like *Steam* or *PSNProfiles*). It is built on a Serverless architecture and powered by the Next.js App Router.
+**TrophyD** is a web platform that merges activity tracking concepts (similar to *Letterboxd*) with guide and completionist mechanics (like *Steam* or *PSNProfiles*). Built on a Serverless architecture and powered by the Next.js App Router, it provides a seamless and immersive experience.
 
-* **Social Interaction:** Users can log their 100% completed games, rate titles, and build a network of followers and following.
-* **Immersive Experience (3D):** Interactive visual representation through 3D cards rendered directly in the browser (WebGL), simulating the original game hardware (PS5, N64, GameBoy, Switch, etc.).
-* **Collaboration:** The system allows users to provide detailed guides and checklists to help other *trophy hunters* in their playthroughs.
+The core of TrophyD is not just tracking what you play, but **building the ultimate collaborative library** for the completionist community through an immersive user experience (UX)[cite: 2].
 
-> The core of TrophyD is not just tracking what you play, but **building the ultimate collaborative library** for the completionist community through an immersive user experience (UX).
+### Key Features
+
+<!-- gif cuando buscas un juego, lo rotas un poco y lo abres para loguear -->
+
+*   **Immersive 3D Experience:** Interactive visual representation through 3D cards rendered directly in the browser via WebGL, simulating original game hardware (PS5, N64, GameBoy, Switch, etc.)[cite: 2].
+*   **Social Interaction:** Log your 100% completed games, rate titles, and build a network of followers and following[cite: 2].
+*   **Collaboration:** Write and share detailed guides and checklists to help other *trophy hunters* in their playthroughs[cite: 2].
 
 ---
 
-## Core Pillars
+## Core Pillars & Architecture
 
-The primary goal is to deliver an ultra-fast, scalable, and visually stunning platform. The system is evaluated and built upon:
+The primary goal is to deliver an ultra-fast, scalable, and visually stunning platform[cite: 2]. The system is evaluated and built upon:
 
 | Pillar | Key Technology | Purpose |
 | :--- | :--- | :--- |
-| **Scalability** | `Supabase` & `PostgreSQL` | Ensure robust, real-time user management and relational databases. |
-| **Web Immersion** | `Three.js` & `React Three Fiber` | Render `.glb` models of classic and modern consoles without performance penalties. |
-| **Data Accuracy** | `IGDB API (Twitch)` | Ensure reliable metadata, cover art, and technical details for any video game. |
+| **Scalability** | `Supabase` & `PostgreSQL` | Ensure robust, real-time user management and relational databases[cite: 2]. |
+| **Web Immersion** | `Three.js` & `React Three Fiber` | Render `.glb` models of classic and modern consoles without performance penalties[cite: 2]. |
+| **Data Accuracy** | `IGDB API (Twitch)` | Ensure reliable metadata, cover art, and technical details for any video game[cite: 2]. |
 
----
+### Tech Stack
+*   **Frontend:** Next.js (App Router), React, Tailwind CSS[cite: 2].
+*   **Backend & Auth:** Supabase (BaaS)[cite: 2].
+*   **3D Graphics:** React Three Fiber, Drei[cite: 2].
+*   **UI Components:** shadcn/ui (Radix Primitives)[cite: 2].
+*   **Integrations:** IGDB API[cite: 2].
 
-## Tech Stack
+## Project Structure
 
-* **Frontend:** Next.js (App Router), React, Tailwind CSS.
-* **Backend & Auth:** Supabase (BaaS).
-* **3D Graphics:** React Three Fiber, Drei.
-* **UI Components:** shadcn/ui (Radix Primitives).
-* **Integrations:** IGDB API.
+<!-- gif creando una guía -->
+
+*   `/app`: Main application routing. Contains auth modules (`/login`, `/register`), user profiles (`/profile/[nickname]`), search, and API integration (`/api/igdb`)[cite: 2].
+*   `/components`: Reusable UI components (based on shadcn) and complex frontend logic, highlighting the 3D model viewer (`gameCard3D.tsx`)[cite: 2].
+*   `/lib`: Supabase client initialization logic and app utilities[cite: 2].
+*   `/public/models`: Static directory storing 3D models (`.glb`) and textures for over 15 different platforms and consoles used in the platform[cite: 2].
 
 ---
 

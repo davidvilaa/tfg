@@ -4,6 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Framework-Next.js%2015-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js">
+  <img src="https://img.shields.io/badge/Library-React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
   <img src="https://img.shields.io/badge/Language-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase">
 </p>
@@ -21,7 +22,7 @@ The core of TrophyD is not just tracking what you play, but **building the ultim
 <details>
   <summary><strong>🎮 Immersive 3D Experience</strong></summary>
   <br>
-  Interactive visual representation through 3D cards rendered directly in the browser via WebGL, simulating original game hardware (PS5, N64, GameBoy, Switch, etc.).
+  Interactive visual representation through 3D cards rendered directly in the browser using React Three Fiber (WebGL), simulating original game hardware (PS5, N64, GameBoy, Switch, etc.).
   <br><br>
   <img src="https://github.com/user-attachments/assets/08f8d2b3-d378-41f0-8a23-3aed45a8dba0" alt="3D Interactive Cards" width="100%">
 </details>

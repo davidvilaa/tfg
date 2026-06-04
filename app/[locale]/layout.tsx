@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 
+// @ts-ignore
 import "@/app/globals.css";
 // @ts-ignore
 import "7.css/dist/7.css";

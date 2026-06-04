@@ -132,81 +132,68 @@ export default function Navbar() {
                 <button type="submit" aria-label="search" style={{ height: "93%" }}></button>
               </form>
 
-              {/* === SELECTOR DE IDIOMA IGUAL AL PERFIL === */}
               <div style={{ position: "relative" }}>
                 <button 
                   type="button" 
                   onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                  style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", padding: "4px 8px", background: "transparent", border: "none" }}
+                  style={{ display: "flex", alignItems: "center", gap: "6px" }}
                 >
                   <span className={`fi ${currentLocale === 'es' ? 'fi-es' : 'fi-gb'}`} style={{ borderRadius: "2px" }}></span>
-                  <strong style={{ fontSize: "14px", color: "#000", textShadow: "0 0 3px rgba(255,255,255,0.8)", textTransform: "uppercase" }}>
-                    {currentLocale}
-                  </strong>
-                  <ChevronDown size={14} style={{ color: "#000" }} />
+                  <strong style={{ textTransform: "uppercase" }}>{currentLocale}</strong>
+                  <ChevronDown size={14} />
                 </button>
 
                 {isLangMenuOpen && (
-                  <div style={{
-                    position: "absolute", top: "100%", right: 0, marginTop: "8px", minWidth: "150px",
-                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
-                    backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)",
-                    border: "1px solid rgba(255, 255, 255, 0.5)", boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.2)",
-                    borderRadius: "4px", padding: "8px", display: "flex", flexDirection: "column", gap: "6px", zIndex: 100
-                  }}>
-                    <button type="button" onClick={() => changeLanguage('es')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px", background: "transparent", border: "none", cursor: "pointer", fontSize: "14px", color: "#000" }}>
-                      <span className="fi fi-es" style={{ borderRadius: "2px" }}></span> Español
-                    </button>
-                    <button type="button" onClick={() => changeLanguage('en')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px", background: "transparent", border: "none", cursor: "pointer", fontSize: "14px", color: "#000" }}>
-                      <span className="fi fi-gb" style={{ borderRadius: "2px" }}></span> English
-                    </button>
-                  </div>
+                  <ul role="menu" style={{ position: "absolute", top: "100%", right: 0, marginTop: "2px", zIndex: 100, minWidth: "120px" }}>
+                    <li role="menuitem" onClick={() => changeLanguage('es')} style={{ cursor: "pointer" }}>
+                      <a style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        <span className="fi fi-es"></span> Español
+                      </a>
+                    </li>
+                    <li role="menuitem" onClick={() => changeLanguage('en')} style={{ cursor: "pointer" }}>
+                      <a style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        <span className="fi fi-gb"></span> English
+                      </a>
+                    </li>
+                  </ul>
                 )}
               </div>
 
-              {/* === PERFIL === */}
               <div style={{ position: "relative" }}> 
-                
                 <button 
                   type="button" 
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", padding: "4px 8px", background: "transparent", border: "none" }}
+                  style={{ display: "flex", alignItems: "center", gap: "6px" }}
                 >
                   <User size={16} color="#0044aa" />
-                  <strong style={{ fontSize: "14px", color: "#000", textShadow: "0 0 3px rgba(255,255,255,0.8)" }}>
-                    {username}
-                  </strong>
-                  <ChevronDown size={14} style={{ color: "#000" }} />
+                  <strong>{username}</strong>
+                  <ChevronDown size={14} />
                 </button>
 
                 {isMenuOpen && (
-                  <div style={{
-                    position: "absolute", top: "100%", right: 0, marginTop: "8px", minWidth: "150px",
-                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
-                    backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)",
-                    border: "1px solid rgba(255, 255, 255, 0.5)", boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.2)",
-                    borderRadius: "4px", padding: "8px", display: "flex", flexDirection: "column", gap: "6px", zIndex: 100
-                  }}>
+                  <ul role="menu" style={{ position: "absolute", top: "100%", right: 0, marginTop: "2px", zIndex: 100, minWidth: "160px" }}>
                     
-                    <Link href={`/profile/${username}`} onClick={() => setIsMenuOpen(false)} style={{ textDecoration: "none", color: "inherit" }}>
-                      <button type="button" style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px", background: "transparent", border: "none", cursor: "pointer" }}>
+                    <li role="menuitem" style={{ cursor: "pointer" }}>
+                      <Link href={`/profile/${username}`} onClick={() => setIsMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "inherit" }}>
                         <User size={14} /> {t('profile')}
-                      </button>
-                    </Link>
+                      </Link>
+                    </li>
 
-                    <Link href="/settings" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: "none", color: "inherit" }}>
-                      <button type="button" style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px", background: "transparent", border: "none", cursor: "pointer" }}>
+                    <li role="menuitem" style={{ cursor: "pointer" }}>
+                      <Link href="/settings" onClick={() => setIsMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "inherit" }}>
                         <Settings size={14} /> {t('settings')}
-                      </button>
-                    </Link>
+                      </Link>
+                    </li>
 
-                    <hr style={{ margin: "2px 0", border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottom: "1px solid rgba(255,255,255,0.5)" }} />
+                    <li className="divider"></li>
 
-                    <button type="button" onClick={handleLogout} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px", color: "darkred", background: "transparent", border: "none", cursor: "pointer" }}>
-                      <LogOut size={14} /> {t('logout')}
-                    </button>
+                    <li role="menuitem" onClick={handleLogout} style={{ cursor: "pointer" }}>
+                      <a style={{ display: "flex", alignItems: "center", gap: "8px", color: "darkred" }}>
+                        <LogOut size={14} /> {t('logout')}
+                      </a>
+                    </li>
 
-                  </div>
+                  </ul>
                 )}
               </div>
             </div>

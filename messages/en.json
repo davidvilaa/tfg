@@ -1,0 +1,12 @@
+{
+  "Home": {
+    "title": "Welcome to TrophyD",
+    "subtitle": "Track your completions"
+  },
+  "Navbar": {
+    "search": "Search games...",
+    "register": "Register",
+    "login": "Login",
+    "profile": "Profile"
+  }
+}

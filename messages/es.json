@@ -1,0 +1,12 @@
+{
+  "Home": {
+    "title": "Bienvenido a TrophyD",
+    "subtitle": "Rastrea tus platinos"
+  },
+  "Navbar": {
+    "search": "Buscar juegos...",
+    "register": "Registrarse",
+    "login": "Iniciar sesión",
+    "profile": "Perfil"
+  }
+}

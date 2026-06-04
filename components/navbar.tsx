@@ -2,15 +2,18 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import { Trophy, User, Settings, LogOut, ChevronDown } from "lucide-react"; 
-import { useLocale } from 'next-intl';
+import { Trophy, User, Settings, LogOut, ChevronDown } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const currentLocale = useLocale();
+  const params = useParams();
+  const currentLocale = (params.locale as string) || 'es';
+
+  const t = useTranslations('Navbar');
 
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -66,9 +69,17 @@ export default function Navbar() {
 
   const changeLanguage = (newLocale: string) => {
     if (!pathname) return;
+    
     const segments = pathname.split('/');
-    segments[1] = newLocale; 
-    router.push(segments.join('/'));
+    const locales = ['en', 'es']; 
+    
+    if (locales.includes(segments[1])) {
+      segments[1] = newLocale; 
+      router.push(segments.join('/'));
+    } else {
+      router.push(`/${newLocale}${pathname === '/' ? '' : pathname}`);
+    }
+    
     setIsLangMenuOpen(false);
   };
 
@@ -109,10 +120,10 @@ export default function Navbar() {
           ) : !user ? (
             <section className="field-row" style={{ display: "flex", margin: 0, gap: "15px" }}>
               <Link href="/login">
-                <button type="button">Login</button>
+                <button type="button">{t('login')}</button>
               </Link>
               <Link href="/register">
-                <button className="default">Registro</button>
+                <button className="default">{t('register')}</button>
               </Link>
             </section>
           ) : (
@@ -121,7 +132,7 @@ export default function Navbar() {
               <form className="searchbox" onSubmit={ejecutarBusqueda} style={{ display: "flex", height: "28px", minWidth: "250px" }}>
                 <input 
                   type="search" 
-                  placeholder="Buscar juegos..." 
+                  placeholder={t('search')}
                   style={{ height: "100%", width: "100%" }} 
                   value={textoBusqueda}
                   onChange={(e) => setTextoBusqueda(e.target.value)}
@@ -129,13 +140,12 @@ export default function Navbar() {
                 <button type="submit" aria-label="search" style={{ height: "93%" }}></button>
               </form>
 
-              {/* === SELECTOR DE IDIOMA (Mismo diseño que el perfil original) === */}
               <div style={{ position: "relative" }}> 
                 <button 
                   type="button" 
                   onClick={() => {
                     setIsLangMenuOpen(!isLangMenuOpen);
-                    setIsMenuOpen(false); // Cierra el otro menú si está abierto
+                    setIsMenuOpen(false);
                   }}
                   style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", padding: "4px 8px" }}
                 >
@@ -178,13 +188,12 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* === PERFIL ORIGINAL INTACTO === */}
               <div style={{ position: "relative" }}> 
                 <button 
                   type="button" 
                   onClick={() => {
                     setIsMenuOpen(!isMenuOpen);
-                    setIsLangMenuOpen(false); // Cierra el otro menú si está abierto
+                    setIsLangMenuOpen(false);
                   }}
                   style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", padding: "4px 8px" }}
                 >
@@ -217,22 +226,21 @@ export default function Navbar() {
                     
                     <Link href={`/profile/${username}`} onClick={() => setIsMenuOpen(false)}>
                       <button type="button" style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
-                        <User size={14} /> Perfil
+                        <User size={14} /> {t('profile')}
                       </button>
                     </Link>
 
                     <Link href="/settings" onClick={() => setIsMenuOpen(false)}>
                       <button type="button" style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
-                        <Settings size={14} /> Ajustes
+                        <Settings size={14} /> {t('settings')}
                       </button>
                     </Link>
 
                     <hr style={{ margin: "2px 0", border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottom: "1px solid rgba(255,255,255,0.5)" }} />
 
                     <button type="button" onClick={handleLogout} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px", color: "darkred" }}>
-                      <LogOut size={14} /> Salir
+                      <LogOut size={14} /> {t('logout')}
                     </button>
-
                   </div>
                 )}
               </div>

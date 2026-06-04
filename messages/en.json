@@ -7,6 +7,8 @@
     "search": "Search games...",
     "register": "Register",
     "login": "Login",
-    "profile": "Profile"
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }

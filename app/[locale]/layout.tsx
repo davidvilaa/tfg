@@ -5,6 +5,8 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "@/app/globals.css";
 // @ts-ignore
 import "7.css/dist/7.css";
+// @ts-ignore
+import "flag-icons/css/flag-icons.min.css";
 
 import Navbar from "@/components/navbar";
 import { NotificationProvider } from "@/components/NotificationProvider";

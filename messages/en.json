@@ -10,5 +10,16 @@
     "profile": "Profile",
     "settings": "Settings",
     "logout": "Logout"
+  },
+  "Login":{
+    "title": "Login - Trophyd",
+    "label_email": "Email",
+    "input_email": "your@email.com",
+    "label_password": "Password",
+    "btn_iniciar_sesion": "Login",
+    "btn_iniciar_sesion_loading": "Logging in...",
+    "si_no_tienes_cuenta": "if you don't have an account",
+    "btn_si_no_tienes_cuenta": "Create a new account",
+    "error_incorrect_credentials": "Incorrect email or password"
   }
 }

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react"; 
+import { useState, useRef, use } from "react"; 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import Draggable from "react-draggable";
 import { Trophy } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,6 +16,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const nodeRef = useRef(null);
+
+  const t = useTranslations("Login");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ export default function LoginPage() {
     });
 
     if (authError) {
-      setError("Correo o contraseña incorrectos");
+      setError(t("error_incorrect_credentials"));
       setLoading(false);
       return;
     }
@@ -69,7 +72,7 @@ export default function LoginPage() {
         <div ref={nodeRef} className="window glass active" style={{ width: "100%", maxWidth: "420px" }}>
           
           <div className="title-bar" style={{ cursor: "grab" }}>
-            <div className="title-bar-text">Autenticación de Usuario - Trophyd</div>
+            <div className="title-bar-text">{t("title")}</div>
             <div className="title-bar-controls">
               <button aria-label="Minimize"></button>
               <button aria-label="Maximize"></button>
@@ -97,17 +100,17 @@ export default function LoginPage() {
               <div style={{ width: "100%", maxWidth: "340px", display: "flex", flexDirection: "column", gap: "12px" }}>
                 
                 <div className="form-row">
-                  <label htmlFor="email" style={{ fontSize: "12px", fontWeight: "bold", color: "#333", textAlign: "left" }}>Email:</label>
+                  <label htmlFor="email" style={{ fontSize: "12px", fontWeight: "bold", color: "#333", textAlign: "left" }}>{t("label_email")}:</label>
                   <input 
                     id="email" type="email" required 
                     value={email} onChange={(e) => setEmail(e.target.value)}
-                    placeholder="tu@email.com"
+                    placeholder={t("input_email")}
                     style={{ width: "100%", padding: "6px 8px", boxSizing: "border-box" }}
                   />
                 </div>
 
                 <div className="form-row">
-                  <label htmlFor="password" style={{ fontSize: "12px", fontWeight: "bold", color: "#333", textAlign: "left" }}>Pass:</label>
+                  <label htmlFor="password" style={{ fontSize: "12px", fontWeight: "bold", color: "#333", textAlign: "left" }}>{t("label_password")}:</label>
                   <input 
                     id="password" type="password" required 
                     value={password} onChange={(e) => setPassword(e.target.value)}
@@ -119,17 +122,17 @@ export default function LoginPage() {
 
               <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "10px", marginTop: "5px" }}>
                 <button type="submit" className="default btn-gelatina" disabled={loading} style={{ width: "100%", height: "38px", fontSize: "14px" }}>
-                  {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
+                  {loading ? t("btn_iniciar_sesion_loading") : t("btn_iniciar_sesion")}
                 </button>
                 
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                     <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(0,0,0,0.1)" }}></div>
-                    <span style={{ fontSize: "11px", color: "#666", whiteSpace: "nowrap" }}>o si no tienes cuenta</span>
+                    <span style={{ fontSize: "11px", color: "#666", whiteSpace: "nowrap" }}>{t("si_no_tienes_cuenta")}</span>
                     <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(0,0,0,0.1)" }}></div>
                 </div>
 
                 <Link href="/register" style={{ width: "100%" }}>
-                  <button type="button" className="btn-gelatina" style={{ width: "100%", height: "32px" }}>Crear una cuenta nueva</button>
+                  <button type="button" className="btn-gelatina" style={{ width: "100%", height: "32px" }}>{t("btn_si_no_tienes_cuenta")}</button>
                 </Link>
               </div>
             </form>

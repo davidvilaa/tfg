@@ -9,6 +9,7 @@ import GameCaseCard from "@/components/cards/gameCard";
 import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { useNotification } from "@/components/NotificationProvider";
+import { useTranslations } from "next-intl";
 
 export default function ProfileGamesPage() {
   const params = useParams();
@@ -31,6 +32,8 @@ export default function ProfileGamesPage() {
   const [isLogging, setIsLogging] = useState(false);
 
   const { showNotification } = useNotification();
+
+  const t = useTranslations("Profile - Games");
 
   const cargarJuegos = async () => {
     setLoading(true);
@@ -104,11 +107,12 @@ export default function ProfileGamesPage() {
   const escalas = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   const statuses = ["completed", "playing", "paused", "dropped", "wishlist"];
 
-  if (loading) return <div style={{ padding: "20px", textAlign: "center" }}>Cargando colección...</div>;
+  if (loading) return <div style={{ padding: "20px", textAlign: "center" }}>{t("info_loading")}</div>;
 
   return (
     <div ref={mainRef} style={{ position: "relative", minHeight: "100%" }}>
       <fieldset style={{ padding: "20px", backgroundColor: "#fff", border: "1px solid #ccc", borderRadius: "4px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <legend style={{ fontSize: "18px" }}>{t("section_games")}</legend>
         <style>{`
           .status-btn {
             padding: 4px 12px;
@@ -156,9 +160,9 @@ export default function ProfileGamesPage() {
 
           <div style={{ display: "flex", gap: "15px", alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <label htmlFor="filterRating">Rating:</label>
+              <label htmlFor="filterRating">{t("label_rating")}</label>
               <select id="filterRating" value={filterRating} onChange={(e) => setFilterRating(e.target.value)}>
-                <option value="all">Filter...</option>
+                <option value="all">{t("label_rating_placeholder")}</option>
                 {escalas.map(nota => (
                   <option key={nota} value={nota}>{nota} ★</option>
                 ))}
@@ -166,13 +170,13 @@ export default function ProfileGamesPage() {
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <label htmlFor="sortBy">Sort By:</label>
+              <label htmlFor="sortBy">{t("label_sortby")}</label>
               <select id="sortBy" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                <option value="added_desc">When Added</option>
-                <option value="title_asc">Title (A-Z)</option>
-                <option value="title_desc">Title (Z-A)</option>
-                <option value="rating_desc">Highest Rated</option>
-                <option value="time_desc">Most Played Time</option>
+                <option value="added_desc">{t("label_sortby_options.when_added")}</option>
+                <option value="title_asc">{t("label_sortby_options.title_az")}</option>
+                <option value="title_desc">{t("label_sortby_options.title_za")}</option>
+                <option value="rating_desc">{t("label_sortby_options.highest_rated")}</option>
+                <option value="time_desc">{t("label_sortby_options.most_played_time")}</option>
               </select>
             </div>
 
@@ -207,7 +211,7 @@ export default function ProfileGamesPage() {
               />
             ))
           ) : (
-            <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#666", padding: "20px 0" }}>No se encontraron juegos con estos filtros.</p>
+            <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#666", padding: "20px 0" }}>{t("info_no_games_found")}</p>
           )}
         </div>
       </fieldset>

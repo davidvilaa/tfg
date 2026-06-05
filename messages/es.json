@@ -70,5 +70,60 @@
     "users_title": "Usuarios",
     "users_searching": "Buscando usuarios...",
     "info_user_searching_not_found": "No se encontraron usuarios"
+  },
+  "Profile - Layout":{
+    "info_bio_empty": "Este usuario aún no ha escrito una biografía",
+    "info_user_searching": "Buscando usuario...",
+    "info_error_user_not_found": "Usuario no encontrado",
+    "info_error_user_not_found_desc": "no existe o ha sido eliminado",
+    "btn_error_go_back": "Volver al inicio",
+    "btn_unfollow": "Dejar de seguir",
+    "btn_follow": "Seguir",
+    "btn_menu_profile": "Perfil",
+    "btn_menu_games": "Juegos",
+    "btn_menu_guides": "Guías",
+    "btn_menu_network": "Red"
+  },
+  "Profile - Profile":{
+    "info_loading": "Cargando estadísticas...",
+    "section_ratings": "Calificaciones",
+    "label_average_rating": "NOTA MEDIA",
+    "section_favorite_games": "Juegos favoritos"
+  },
+  "Profile - Games":{
+    "info_loading": "Cargando colección...",
+    "section_games": "Juegos en la Colección",
+    "status_completed": "Completado",
+    "status_playing": "Jugando",
+    "status_paused": "Pausado",
+    "status_dropped": "Abandonado",
+    "status_whishlist": "Deseado",
+    "label_rating": "Calificación",
+    "label_rating_placeholder": "Filtro...",
+    "label_sortby": "Ordenar por",
+    "label_sortby_options": {
+      "when_added": "Fecha de adición",
+      "title_az": "Título (A-Z)",
+      "title_za": "Título (Z-A)",
+      "highest_rated": "Calificación más alta",
+      "most_played_time": "Más tiempo jugado"
+    },
+    "info_filter_error": "No se encontraron juegos con esos filtros"
+  },
+  "Profile - Guides": {
+    "info_loading": "Cargando guías...",
+    "section_guides": "Guías Publicadas",
+    "info_error_no_guides": "Este usuario no ha publicado ninguna guía"
+  },
+  "Profile - Network":{
+    "info_loading": "Cargando red...",
+    "section_followers": "Seguidores",
+    "btn_followers_follow": "Seguir",
+    "btn_followers_unfollow": "Dejar de seguir",
+    "btn_followers_empty": "Este usuario aún no tiene seguidores",
+    "section_following": "Siguiendo",
+    "btn_following_follow": "Seguir",
+    "btn_following_unfollow": "Dejar de seguir",
+    "btn_following_empty": "Este usuario aún no sigue a ningún usuario"
   }
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { UserPlus, UserMinus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function ProfileNetworkPage() {
   const params = useParams();
@@ -16,6 +17,8 @@ export default function ProfileNetworkPage() {
   const [following, setFollowing] = useState<any[]>([]);
   
   const [myFollowingIds, setMyFollowingIds] = useState<string[]>([]);
+
+  const t = useTranslations("Profile - Network");
 
   useEffect(() => {
     const cargarNetwork = async () => {
@@ -96,7 +99,7 @@ export default function ProfileNetworkPage() {
     }
   };
 
-  if (loading) return <div style={{ padding: "20px", textAlign: "center" }}>Cargando network...</div>;
+  if (loading) return <div style={{ padding: "20px", textAlign: "center" }}>{t("info_loading")}</div>;
 
   return (
     <div style={{ display: "flex", gap: "30px", alignItems: "flex-start" }}>
@@ -121,7 +124,7 @@ export default function ProfileNetworkPage() {
       `}</style>
 
       <fieldset style={{ flex: 1, padding: "20px", backgroundColor: "#fff", minHeight: "300px" }}>
-        <legend style={{ fontSize: "18px" }}>Followers</legend>
+        <legend style={{ fontSize: "18px" }}>{t("section_followers")}</legend>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "15px" }}>
           {followers.length > 0 ? (
             followers.map((user) => {
@@ -148,11 +151,11 @@ export default function ProfileNetworkPage() {
                         >
                           {amIFollowing ? (
                             <>
-                              <UserMinus size={13} strokeWidth={2.5} /> Unfollow
+                              <UserMinus size={13} strokeWidth={2.5} /> {t("btn_followers_unfollow")}
                             </>
                           ) : (
                             <>
-                              <UserPlus size={13} strokeWidth={2.5} /> Follow
+                              <UserPlus size={13} strokeWidth={2.5} /> {t("btn_followers_follow")}
                             </>
                           )}
                         </button>
@@ -163,13 +166,13 @@ export default function ProfileNetworkPage() {
               );
             })
           ) : (
-            <p style={{ color: "#666", gridColumn: "1 / -1", textAlign: "center" }}>Aún no tiene seguidores.</p>
+            <p style={{ color: "#666", gridColumn: "1 / -1", textAlign: "center" }}>{t("btn_followers_empty")}</p>
           )}
         </div>
       </fieldset>
 
       <fieldset style={{ flex: 1, padding: "20px", backgroundColor: "#fff", minHeight: "300px" }}>
-        <legend style={{ fontSize: "18px" }}>Following</legend>
+        <legend style={{ fontSize: "18px" }}>{t("section_following")}</legend>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "15px" }}>
           {following.length > 0 ? (
             following.map((user) => {
@@ -196,11 +199,11 @@ export default function ProfileNetworkPage() {
                         >
                           {amIFollowing ? (
                             <>
-                              <UserMinus size={13} strokeWidth={2.5} /> Unfollow
+                              <UserMinus size={13} strokeWidth={2.5} /> {t("btn_following_unfollow")}
                             </>
                           ) : (
                             <>
-                              <UserPlus size={13} strokeWidth={2.5} /> Follow
+                              <UserPlus size={13} strokeWidth={2.5} /> {t("btn_following_follow")}
                             </>
                           )}
                         </button>
@@ -211,7 +214,7 @@ export default function ProfileNetworkPage() {
               );
             })
           ) : (
-            <p style={{ color: "#666", gridColumn: "1 / -1", textAlign: "center" }}>No sigue a nadie todavía.</p>
+            <p style={{ color: "#666", gridColumn: "1 / -1", textAlign: "center" }}>{t("btn_following_empty")}</p>
           )}
         </div>
       </fieldset>

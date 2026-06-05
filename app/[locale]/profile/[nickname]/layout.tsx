@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { UserPlus, UserMinus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function ProfileLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -20,6 +21,8 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isToggling, setIsToggling] = useState(false);
+
+  const t = useTranslations("Profile - Layout");
 
   useEffect(() => {
     const cargarPerfil = async () => {
@@ -46,7 +49,7 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
         setUserProfile({
           id: profileData.id,
           nickname: profileData.nickname,
-          bio: profileData.bio || "Este usuario aún no ha escrito una biografía.",
+          bio: profileData.bio || t("info_bio_empty"),
           pfp: profileData.pfp_url || "https://www.gravatar.com/avatar/0?d=mp&f=y"
         });
 
@@ -96,22 +99,22 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
         setIsFollowing(true);
       }
     } catch (error: any) {
-      console.error("Error al hacer toggle follow:", error);
+      console.error(error);
     } finally {
       setIsToggling(false);
     }
   };
 
   if (loading) {
-    return <div className="min-h-screen bg-[#f8f9fa] flex items-center justify-center">Buscando usuario...</div>;
+    return <div className="min-h-screen bg-[#f8f9fa] flex items-center justify-center">{t("info_user_searching")}</div>;
   }
 
   if (perfilNoEncontrado) {
     return (
       <div className="min-h-screen bg-[#f8f9fa] flex flex-col items-center justify-center gap-4">
-        <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>Usuario no encontrado</h1>
-        <p>El perfil "{targetNickname}" no existe en Trophyd.</p>
-        <button onClick={() => router.push("/")} style={{ padding: "8px 16px" }}>Volver al inicio</button>
+        <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>{t("info_error_user_not_found")}</h1>
+        <p>{t("info_error_user_not_found_desc")}</p>
+        <button onClick={() => router.push("/")} style={{ padding: "8px 16px" }}>{t("btn_error_go_back")}</button>
       </div>
     );
   }
@@ -151,11 +154,11 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
                 >
                   {isFollowing ? (
                     <>
-                      <UserMinus size={20} strokeWidth={2.5} /> Unfollow
+                      <UserMinus size={20} strokeWidth={2.5} /> {t("btn_unfollow")}
                     </>
                   ) : (
                     <>
-                      <UserPlus size={20} strokeWidth={2.5} /> Follow
+                      <UserPlus size={20} strokeWidth={2.5} /> {t("btn_follow")}
                     </>
                   )}
                 </button>
@@ -183,16 +186,16 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
 
         <ul role="menubar" style={{ marginBottom: "30px", fontSize: "16px" }}>
           <li role="menuitem" className={pathname === baseUrl ? "tab-activa" : ""}>
-            <Link href={baseUrl} style={{ display: "block", color: "inherit", textDecoration: "none" }}>Profile</Link>
+            <Link href={baseUrl} style={{ display: "block", color: "inherit", textDecoration: "none" }}>{t("btn_menu_profile")}</Link>
           </li>
           <li role="menuitem" className={pathname === `${baseUrl}/games` ? "tab-activa" : ""}>
-            <Link href={`${baseUrl}/games`} style={{ display: "block", color: "inherit", textDecoration: "none" }}>Games</Link>
+            <Link href={`${baseUrl}/games`} style={{ display: "block", color: "inherit", textDecoration: "none" }}>{t("btn_menu_games")}</Link>
           </li>
           <li role="menuitem" className={pathname === `${baseUrl}/guides` ? "tab-activa" : ""}>
-            <Link href={`${baseUrl}/guides`} style={{ display: "block", color: "inherit", textDecoration: "none" }}>Guides</Link>
+            <Link href={`${baseUrl}/guides`} style={{ display: "block", color: "inherit", textDecoration: "none" }}>{t("btn_menu_guides")}</Link>
           </li>
           <li role="menuitem" className={pathname === `${baseUrl}/network` ? "tab-activa" : ""}>
-            <Link href={`${baseUrl}/network`} style={{ display: "block", color: "inherit", textDecoration: "none" }}>Network</Link>
+            <Link href={`${baseUrl}/network`} style={{ display: "block", color: "inherit", textDecoration: "none" }}>{t("btn_menu_network")}</Link>
           </li>
         </ul>
 

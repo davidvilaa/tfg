@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import GuideCaseCard from "@/components/cards/guideCard";
+import { useTranslations } from "next-intl";
 
 export default function ProfileGuidesPage() {
   const params = useParams();
@@ -13,6 +14,8 @@ export default function ProfileGuidesPage() {
   const [loading, setLoading] = useState(true);
   const [guides, setGuides] = useState<any[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  const t = useTranslations("Profile - Guides");
 
   useEffect(() => {
     const cargarGuias = async () => {
@@ -46,11 +49,11 @@ export default function ProfileGuidesPage() {
     if (targetNickname) cargarGuias();
   }, [targetNickname]);
 
-  if (loading) return <div style={{ padding: "20px", textAlign: "center" }}>Cargando guías...</div>;
+  if (loading) return <div style={{ padding: "20px", textAlign: "center" }}>{t("info_loading")}</div>;
 
   return (
     <fieldset style={{ padding: "20px", backgroundColor: "#fff", display: "flex", flexDirection: "column", gap: "0px" }}>
-      <legend style={{ fontSize: "18px" }}>Published Guides</legend>
+      <legend style={{ fontSize: "18px" }}>{t("section_guides")}</legend>
       <div style={{ display: "flex", alignItems: "center", paddingBottom: "10px", borderBottom: "0px solid #ccc" }}>
       </div>
 
@@ -71,7 +74,7 @@ export default function ProfileGuidesPage() {
             />
           ))
         ) : (
-          <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#666", padding: "20px 0" }}>Aún no ha publicado ninguna guía.</p>
+          <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#666", padding: "20px 0" }}>{t("info_error_no_guides")}</p>
         )}
       </div>
     </fieldset>

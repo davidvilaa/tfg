@@ -9,6 +9,7 @@ import GameCaseCard from "@/components/cards/gameCard";
 import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { useNotification } from "@/components/NotificationProvider";
+import { useTranslations } from "next-intl";
 
 export default function ProfileContentPage() {
   const router = useRouter();
@@ -30,6 +31,8 @@ export default function ProfileContentPage() {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   const { showNotification } = useNotification();
+
+  const t = useTranslations("Profile - Profile");
 
   useEffect(() => {
     const comprobarSesion = async () => {
@@ -142,7 +145,7 @@ export default function ProfileContentPage() {
   const escalas = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
   if (loading) {
-    return <div style={{ padding: "20px", textAlign: "center" }}>Cargando estadísticas...</div>;
+    return <div style={{ padding: "20px", textAlign: "center" }}>{t("info_loading")}</div>;
   }
 
   return (
@@ -165,7 +168,7 @@ export default function ProfileContentPage() {
         `}</style>
         
         <fieldset style={{ width: "280px", padding: "15px", display: "flex", flexDirection: "column", gap: "25px", backgroundColor: "#fff", border: "1px solid #ccc" }}>
-          <legend style={{ fontSize: "16px", padding: "0 5px" }}>Ratings</legend>
+          <legend style={{ fontSize: "16px", padding: "0 5px" }}>{t("section_ratings")}</legend>
 
           <style>{`
             .stat-bar {
@@ -185,7 +188,7 @@ export default function ProfileContentPage() {
 
           <div>
             <div style={{ textAlign: "center", marginBottom: "15px" }}>
-              <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>Nota media</span>
+              <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>{t("label_average_rating")}</span>
               <div style={{ fontSize: "28px", color: "#111", marginTop: "2px" }}>
                 {notaMedia > 0 ? `${notaMedia.toFixed(1)} ★` : "--"}
               </div>
@@ -217,7 +220,7 @@ export default function ProfileContentPage() {
         </fieldset>
 
         <fieldset style={{ flex: 1, padding: "20px", backgroundColor: "#fff" }}>
-          <legend style={{ fontSize: "18px" }}>Favorite Games</legend>
+          <legend style={{ fontSize: "18px" }}>{t("section_favorite_games")}</legend>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "15px" }}>
             {favoritosMostrados.map((fav, index) => (
               <GameCaseCard 

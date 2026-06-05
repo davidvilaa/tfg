@@ -70,5 +70,60 @@
     "users_title": "Users",
     "users_searching": "Searching users...",
     "info_user_searching_not_found": "No users found"
+  },
+  "Profile - Layout":{
+    "info_bio_empty": "This user has not written a biography yet",
+    "info_user_searching": "Searching user...",
+    "info_error_user_not_found": "User not found",
+    "info_error_user_not_found_desc": "does not exist or has been deleted",
+    "btn_error_go_back": "Go back to home",
+    "btn_unfollow": "Unfollow",
+    "btn_follow": "Follow",
+    "btn_menu_profile": "Profile",
+    "btn_menu_games": "Games",
+    "btn_menu_guides": "Guides",
+    "btn_menu_network": "Network"
+  },
+  "Profile - Profile":{
+    "info_loading": "Loading statistics...",
+    "section_ratings": "Ratings",
+    "label_average_rating": "AVERAGE RATING",
+    "section_favorite_games": "Favorite Games"
+  },
+  "Profile - Games":{
+    "info_loading": "Loading collection...",
+    "section_games": "Games in Collection",
+    "status_completed": "Completed",
+    "status_playing": "Playing",
+    "status_paused": "Paused",
+    "status_dropped": "Dropped",
+    "status_whishlist": "Wishlist",
+    "label_rating": "Rating",
+    "label_rating_placeholder": "Filter...",
+    "label_sortby": "Sort by",
+    "label_sortby_options": {
+      "when_added": "Date Added",
+      "title_az": "Title (A-Z)",
+      "title_za": "Title (Z-A)",
+      "highest_rated": "Highest Rated",
+      "most_played_time": "Most Played Time"
+    },
+    "info_filter_error": "No games found with those filters"
+  },
+  "Profile - Guides": {
+    "info_loading": "Loading guides...",
+    "section_guides": "Published Guides",
+    "info_error_no_guides": "This user has not published any guides"
+  },
+  "Profile - Network":{
+    "info_loading": "Loading network...",
+    "section_followers": "Followers",
+    "btn_followers_follow": "Follow",
+    "btn_followers_unfollow": "Unfollow",
+    "btn_followers_empty": "This user has no followers yet",
+    "section_following": "Following",
+    "btn_following_follow": "Follow",
+    "btn_following_unfollow": "Unfollow",
+    "btn_following_empty": "This user is not following anyone yet"
   }
 }

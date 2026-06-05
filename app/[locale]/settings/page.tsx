@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import Draggable from "react-draggable";
+import { useTranslations } from "next-intl";
 
 export default function ConfigPage() {
   const router = useRouter();
@@ -24,6 +25,8 @@ export default function ConfigPage() {
   
   const [mensaje, setMensaje] = useState<{ tipo: "error" | "exito", texto: string } | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const t = useTranslations("Settings");
 
   useEffect(() => {
     const cargarDatos = async () => {
@@ -77,11 +80,11 @@ export default function ConfigPage() {
       await supabase.from("profiles").update({ pfp_url: publicUrl }).eq("id", userId);
       
       setPfpUrl(publicUrl);
-      setMensaje({ tipo: "exito", texto: "¡Foto de perfil actualizada!" });
+      setMensaje({ tipo: "exito", texto: t("info_updated_success") });
 
     } catch (error) {
       console.error(error);
-      setMensaje({ tipo: "error", texto: "Error al subir la imagen" });
+      setMensaje({ tipo: "error", texto: t("info_updated_error") });
     } finally {
       setUploadingAvatar(false);
     }
@@ -103,7 +106,7 @@ export default function ConfigPage() {
       }, 2000);
 
     } catch (error) {
-      setMensaje({ tipo: "error", texto: "Error al guardar el perfil" });
+      setMensaje({ tipo: "error", texto: t("info_save_error") });
     } finally {
       setLoading(false);
     }
@@ -118,16 +121,16 @@ export default function ConfigPage() {
         password: passActualForm1,
       });
 
-      if (authError) throw new Error("Las credenciales actuales son incorrectas.");
+      if (authError) throw new Error(t("info_email_updated_error_credentials"));
 
       const { error: updateError } = await supabase.auth.updateUser({ email: nuevoCorreo });
       if (updateError) throw updateError;
 
-      setMensaje({ tipo: "exito", texto: "¡Email actualizado! Revisa la bandeja de entrada del NUEVO correo para confirmarlo." });
+      setMensaje({ tipo: "exito", texto: t("info_email_updated_success") });
       
       setCorreoActualForm1(""); setPassActualForm1(""); setNuevoCorreo("");
     } catch (error: any) {
-      setMensaje({ tipo: "error", texto: error.message || "Error al cambiar el email." });
+      setMensaje({ tipo: "error", texto: error.message || t("info_email_updated_error_default") });
     } finally {
       setLoading(false);
     }
@@ -142,16 +145,16 @@ export default function ConfigPage() {
         password: passActualForm2,
       });
 
-      if (authError) throw new Error("El correo o contraseña actuales son incorrectos.");
+      if (authError) throw new Error(t("info_password_updated_error_credentials"));
 
       const { error: updateError } = await supabase.auth.updateUser({ password: nuevaPass });
       if (updateError) throw updateError;
 
-      setMensaje({ tipo: "exito", texto: "¡Contraseña actualizada con éxito!" });
+      setMensaje({ tipo: "exito", texto: t("info_password_updated_success") });
       
       setCorreoActualForm2(""); setPassActualForm2(""); setNuevaPass("");
     } catch (error: any) {
-      setMensaje({ tipo: "error", texto: error.message || "Error al cambiar la contraseña." });
+      setMensaje({ tipo: "error", texto: error.message || t("info_password_updated_error_default") });
     } finally {
       setLoading(false);
     }
@@ -164,7 +167,7 @@ export default function ConfigPage() {
         <div ref={nodeRef} className="window glass active" style={{ width: "100%", maxWidth: "700px", position: "absolute" }}>
           
           <div className="title-bar" style={{ cursor: "grab" }}>
-            <div className="title-bar-text">Ajustes</div>
+            <div className="title-bar-text">{t("title")}</div>
             <div className="title-bar-controls">
               <button aria-label="Minimize"></button>
               <button aria-label="Maximize"></button>
@@ -189,7 +192,7 @@ export default function ConfigPage() {
             )}
 
             <fieldset style={{ marginBottom: "15px", padding: "15px" }}>
-              <legend>Información Pública</legend>
+              <legend>{t("section_public_info")}</legend>
               <div style={{ display: "flex", gap: "20px", alignItems: "stretch" }}>                
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", width: "100px", gap: "10px" }}>
                   <div style={{ 
@@ -199,15 +202,15 @@ export default function ConfigPage() {
                   }}></div>
                   
                   <input type="file" id="avatar-upload" accept="image/*" style={{ display: "none" }} onChange={handleAvatarUpload} />
-                  <button onClick={() => document.getElementById("avatar-upload")?.click()} disabled={uploadingAvatar} style={{ width: "100%" }}>
-                    {uploadingAvatar ? "Subiendo" : "Cambiar foto"}
+                  <button onClick={() => document.getElementById("avatar-upload")?.click()} disabled={uploadingAvatar} style={{ width: "110%" }}>
+                    {uploadingAvatar ? t("btn_change_pfp_loading") : t("btn_change_pfp")}
                   </button>
                 </div>
 
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <label htmlFor="nickname" style={{ width: "70px", textAlign: "right", marginRight: "10px" }}>
-                      Nickname:
+                      {t("label_username")}:
                     </label>
                     <input 
                       id="nickname" 
@@ -220,7 +223,7 @@ export default function ConfigPage() {
                   
                   <div style={{ display: "flex", alignItems: "flex-start", flex: 1, marginTop: "10px" }}>
                     <label htmlFor="bio" style={{ width: "70px", textAlign: "right", marginRight: "10px", marginTop: "4px" }}>
-                      Bio:
+                      {t("label_bio")}:
                     </label>
                     <textarea 
                       id="bio" 
@@ -234,62 +237,62 @@ export default function ConfigPage() {
 
               <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
                 <button onClick={handleGuardarPerfil} disabled={loading} className="default">
-                  Guardar Perfil
+                  {t("btn_save_profile")}
                 </button>
               </div>
             </fieldset>
 
             <fieldset style={{ padding: "15px" }}>
-              <legend>Seguridad y Cuenta</legend>
+              <legend>{t("section_security")}</legend>
               <div style={{ display: "flex", gap: "20px", alignItems: "stretch" }}>
                 <fieldset style={{ flex: 1, padding: "15px", display: "flex", flexDirection: "column", margin: 0 }}>
-                  <legend>Cambiar Correo</legend>
+                  <legend>{t("section_change_email")}</legend>
                   <div style={{ display: "flex", flexDirection: "column", gap: "12px", flex: 1 }}>
                     <div className="field-row-stacked" style={{ margin: 0 }}>
-                      <label style={{ color: "#000000" }}>Correo Actual:</label>
+                      <label style={{ color: "#000000" }}>{t("label_current_email_ce")}</label>
                       <input type="email" value={correoActualForm1} onChange={(e) => setCorreoActualForm1(e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
                     </div>
                     
                     <div className="field-row-stacked" style={{ margin: 0 }}>
-                      <label style={{ color: "#000000" }}>Contraseña Actual:</label>
+                      <label style={{ color: "#000000" }}>{t("label_current_password_ce")}</label>
                       <input type="password" value={passActualForm1} onChange={(e) => setPassActualForm1(e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
                     </div>
                     
                     <div className="field-row-stacked" style={{ margin: 0, marginTop: "5px" }}>
-                      <label style={{ fontWeight: "bold", color: "#000000" }}>Nuevo Correo:</label>
+                      <label style={{ fontWeight: "bold", color: "#000000" }}>{t("label_new_email_ce")}</label>
                       <input type="email" value={nuevoCorreo} onChange={(e) => setNuevoCorreo(e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
                     </div>
                     
                     <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "auto", paddingTop: "15px" }}>
                       <button onClick={handleCambiarEmail} disabled={loading} style={{ width: "145px" }}>
-                        Actualizar Correo
+                        {t("btn_new_email_ce")}
                       </button>
                     </div>
                   </div>
                 </fieldset>
 
                 <fieldset style={{ flex: 1, padding: "15px", display: "flex", flexDirection: "column", margin: 0 }}>
-                  <legend>Cambiar Contraseña</legend>
+                  <legend>{t("section_change_password")}</legend>
                   
                   <div style={{ display: "flex", flexDirection: "column", gap: "12px", flex: 1 }}>
                     <div className="field-row-stacked" style={{ margin: 0 }}>
-                      <label style={{ color: "#000000" }}>Correo Actual:</label>
+                      <label style={{ color: "#000000" }}>{t("label_current_email_cp")}</label>
                       <input type="email" value={correoActualForm2} onChange={(e) => setCorreoActualForm2(e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
                     </div>
                     
                     <div className="field-row-stacked" style={{ margin: 0 }}>
-                      <label style={{ color: "#000000" }}>Contraseña Actual:</label>
+                      <label style={{ color: "#000000" }}>{t("label_current_password_cp")}</label>
                       <input type="password" value={passActualForm2} onChange={(e) => setPassActualForm2(e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
                     </div>
                     
                     <div className="field-row-stacked" style={{ margin: 0, marginTop: "5px" }}>
-                      <label style={{ fontWeight: "bold", color: "#000000" }}>Nueva Contraseña:</label>
+                      <label style={{ fontWeight: "bold", color: "#000000" }}>{t("label_new_password_cp")}</label>
                       <input type="password" value={nuevaPass} onChange={(e) => setNuevaPass(e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
                     </div>
                     
                     <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "auto", paddingTop: "15px" }}>
                       <button onClick={handleCambiarPassword} disabled={loading} style={{ width: "145px" }}>
-                        Actualizar Contraseña
+                        {t("btn_new_password_cp")}
                       </button>
                     </div>
                   </div>

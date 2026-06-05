@@ -9,6 +9,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import { ArrowLeft, Clock, Dumbbell, Award, CheckSquare, Square } from "lucide-react";
 import { useNotification } from "@/components/NotificationProvider";
+import { useTranslations } from "next-intl";
 
 export default function GuideReadingPage() {
   const params = useParams();
@@ -29,6 +30,8 @@ export default function GuideReadingPage() {
   const [isTogglingLike, setIsTogglingLike] = useState(false);
 
   const { showNotification } = useNotification();
+
+  const t = useTranslations("Guide - View");
 
   const sanitizeSchema = {
     tagNames: ['u', 'br', 'strong', 'em', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'img', 'a'],
@@ -111,7 +114,7 @@ export default function GuideReadingPage() {
 
   const toggleLike = async () => {
     if (!currentUserId) {
-      showNotification("Error", "Debes iniciar sesión para dar me gusta a una guía.");
+      showNotification("Error", "You have to be logged in to like a guide.");
       return;
     }
     if (isTogglingLike) return;
@@ -140,7 +143,7 @@ export default function GuideReadingPage() {
 
   const toggleCheck = async (checklistId: string) => {
     if (!currentUserId) {
-      showNotification("ERROR", "Debes iniciar sesión para guardar tu progreso.");
+      showNotification("ERROR", "You have to be logged in to save your progress.");
       return;
     }
 
@@ -198,7 +201,7 @@ export default function GuideReadingPage() {
   const progressPercent = totalChecks === 0 ? 0 : Math.round((markedChecks.size / totalChecks) * 100);
 
   if (loading) return <main style={{ minHeight: "100vh", backgroundColor: "#f3f4f6" }}></main>;
-  if (!guideData) return <main style={{ padding: "50px", textAlign: "center", fontSize: "20px" }}>Guía no encontrada.</main>;
+  if (!guideData) return <main style={{ padding: "50px", textAlign: "center", fontSize: "20px" }}>{t("info_error_not_found")}</main>;
 
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f3f4f6", paddingBottom: "50px" }}>
@@ -237,7 +240,7 @@ export default function GuideReadingPage() {
           <ul role="menubar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "14px", position: "relative", marginBottom: 0 }}>
             <div style={{ display: "flex", alignItems: "center" }}>
               <li role="menuitem" tabIndex={0} onClick={() => router.push(`/game/${gameId}`)} style={{ gap: "6px", borderRight: "1px solid #ccc", marginRight: "5px", zIndex: 10 }}>
-                <ArrowLeft size={14} /> Volver al Juego
+                <ArrowLeft size={14} /> {t("section_back")}
               </li>
             </div>
             
@@ -258,7 +261,6 @@ export default function GuideReadingPage() {
                   transform: isLiked ? "scale(1.15)" : "scale(1)",
                   transition: "all 0.2s ease"
                 }}
-                title={isLiked ? "Quitar me gusta" : "Dar me gusta"}
               >
                 ♥
               </button>
@@ -283,7 +285,7 @@ export default function GuideReadingPage() {
 
               {totalChecks > 0 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <span style={{ fontSize: "13px", fontWeight: "bold", color: "#64748b" }}>Progreso: {progressPercent}%</span>
+                  <span style={{ fontSize: "13px", fontWeight: "bold", color: "#64748b" }}>{t("label_progress")}: {progressPercent}%</span>
                   
                   <style>{`
                     @keyframes w7-shine {
@@ -319,7 +321,7 @@ export default function GuideReadingPage() {
             
             <div style={{ display: "flex", flexDirection: "column", gap: "20px", paddingTop: "10px" }}>
               {sections.length === 0 ? (
-                <div style={{ textAlign: "center", color: "#888", padding: "50px" }}>Esta guía aún no tiene contenido.</div>
+                <div style={{ textAlign: "center", color: "#888", padding: "50px" }}>{t("info_error_no_content")}</div>
               ) : (
                 sections.map((sec, index) => {
                   const isCollapsed = collapsedSections[sec.id];
@@ -363,7 +365,7 @@ export default function GuideReadingPage() {
                               borderBottomRightRadius: "3px"
                             }}>
                               <div style={{ fontWeight: "bold", fontSize: "13px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.5px", display: "flex", alignItems: "center", gap: "5px" }}>
-                                <Award size={14} /> Tareas
+                                <Award size={14} /> {t("label_tareas")}
                               </div>
                               {sec.checklist.map((check: any) => {
                                 const isMarked = markedChecks.has(check.id);
@@ -398,7 +400,7 @@ export default function GuideReadingPage() {
             </div>
             <hr style={{ width: "100%", border: "none", borderBottom: "1px solid #e5e7eb", marginTop: "20px" }} />        
             <div style={{ textAlign: "center", fontSize: "14px", color: "#64748b", paddingBottom: "10px" }}>
-              por <span style={{ color: "#3b82f6", fontWeight: "bold"}}>{guideData.profiles?.nickname}</span>
+              {t("by")} <span style={{ color: "#3b82f6", fontWeight: "bold"}}>{guideData.profiles?.nickname}</span>
             </div>
           </div>
         </div>

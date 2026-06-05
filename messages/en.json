@@ -168,5 +168,13 @@
     "input_task": "Task...",
     "info_error_empty_title": "The title cannot be empty",
     "info_saved": "Guide saved successfully"
+  },
+  "Guide - View":{
+    "info_error_not_found": "Guide not found",
+    "info_error_no_content": "This guide has no content to display",
+    "section_back": "Back to Game",
+    "label_progress": "Progress",
+    "label_tareas": "Tasks",
+    "by": "by"
   }
 }

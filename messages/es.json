@@ -168,5 +168,13 @@
     "input_task": "Tarea...",
     "info_error_empty_title": "El título no puede estar vacío",
     "info_saved": "Guía guardada correctamente"
+  },
+  "Guide - View":{
+    "info_error_not_found": "Guía no encontrada",
+    "info_error_no_content": "Esta guía no tiene contenido para mostrar",
+    "section_back": "Volver al Juego",
+    "label_progress": "Progreso",
+    "label_tareas": "Tareas",
+    "by": "por"
   }
 }

@@ -176,5 +176,67 @@
     "label_progress": "Progreso",
     "label_tareas": "Tareas",
     "by": "por"
+  },
+  "Window - Feed": {
+    "title": "Actividad",
+    "info_loading": "Cargando actividad...",
+    "section_friends": "Amigos",
+    "section_global": "Global",
+    "time_options": {
+      "just_now": "ahora mismo",
+      "minutes_ago": "hace {count}m",
+      "hours_ago": "hace {count}h",
+      "yesterday": "ayer",
+      "days_ago": "hace {count}d"
+    },
+    "log_options": {
+      "completed": "ha completado",
+      "started": "ha empezado a jugar",
+      "paused": "ha pausado",
+      "dropped": "ha abandonado",
+      "wishlist": "quiere jugar",
+      "guide_created": "ha publicado una guía de",
+      "default": "ha logueado"
+    },
+    "info_error_login": "Inicia sesión para ver la actividad de tus amigos",
+    "info_error_empty": "No hay actividad para mostrar"
+  },
+  "Window - PlayingNow":{
+    "title": "Personal",
+    "info_loading": "Cargando...",
+    "label_welcome":"¡Bienvenido",
+    "label_welcome_desc":"Tu colección de juegos te espera",
+    "log_options":{
+      "completed":"completados",
+      "playing":"jugando",
+      "guides":"guías",
+      "paused":"pausados",
+      "wishlist":"deseados",
+      "dropped":"abandonados"
+    },
+    "label_playing_now":"Jugando ahora",
+    "info_error_login":"Inicia sesión para ver tus juegos",
+    "info_error_empty":"No tienes juegos a medias"
+  },
+  "Window - TrendingGames":{
+    "title": "Juegos en Tendencia",
+    "info_loading": "Cargando...",
+    "section_top": "Top",
+    "section_top_options":{
+      "daily": "Diario",
+      "weekly": "Semanal",
+      "monthly": "Mensual"
+    },
+    "info_error_empty": "No hay juegos en tendencia para mostrar"
+  },
+  "Window - TrendingGuides":{
+    "title": "Guías en Tendencia",
+    "info_loading": "Cargando...",
+    "section_top_options":{
+      "daily": "Diario",
+      "weekly": "Semanal",
+      "monthly": "Mensual"
+    },
+    "info_error_empty": "No hay guías en tendencia para mostrar"
   }
 }

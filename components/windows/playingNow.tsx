@@ -11,6 +11,7 @@ import GameCard3D from "@/components/gameCard3D";
 import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { useNotification } from "@/components/NotificationProvider";
+import { useTranslations } from "next-intl";
 
 export default function PlayingNow() {
   const [user, setUser] = useState<any>(null);
@@ -27,6 +28,8 @@ export default function PlayingNow() {
   const [focusedGame, setFocusedGame] = useState<any | null>(null);
   const [consolaFocus, setConsolaFocus] = useState<string | null>("pc");
   const [isLogging, setIsLogging] = useState(false);
+
+  const t = useTranslations("Window - PlayingNow");
 
   const fetchMyGames = async () => {
     setLoading(true);
@@ -106,7 +109,7 @@ export default function PlayingNow() {
           <div className="title-bar" style={{ cursor: "grab" }}>
             <div className="title-bar-text" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <Gamepad2 size={14} color="#4ade80" /> 
-              Personal
+              {t("title")}
             </div>
             <div className="title-bar-controls">
               <button aria-label="Minimize"></button>
@@ -120,16 +123,16 @@ export default function PlayingNow() {
             <div style={{ backgroundColor: "#fff", padding: "20px 20px 25px 20px" }}>
               
               {loading ? (
-                <div style={{ textAlign: "center", padding: "20px", color: "#666" }}>Cargando...</div>
+                <div style={{ textAlign: "center", padding: "20px", color: "#666" }}>{t("info_loading")}</div>
               ) : !user ? (
                 <div style={{ textAlign: "center", padding: "20px", color: "#666", fontSize: "13px" }}>
-                  Inicia sesión para ver tus estadísticas y colección.
+                  {t("info_error_login")}
                 </div>
               ) : (
                 <>
                   <div style={{ marginBottom: "25px", lineHeight: "1.4" }}>
                     <div style={{ fontSize: "16px", color: "#111", display: "flex", alignItems: "center", flexWrap: "wrap", gap: "5px" }}>
-                      ¡Bienvenido, 
+                      {t("label_welcome")}, 
                       <Link href={`/profile/${userProfile?.nickname || ""}`} style={{ display: "flex", alignItems: "center", gap: "5px", fontWeight: "bold", color: "#0055cc", textDecoration: "none", cursor: "pointer" }} className="hover:underline">
                         {userProfile?.pfp_url ? (
                           <img 
@@ -153,7 +156,7 @@ export default function PlayingNow() {
                       </Link>!
                     </div>
                     <div style={{ fontSize: "12px", color: "#666", marginTop: "2px" }}>
-                      Tu colección de juegos te espera.
+                      {t("label_welcome_desc")}
                     </div>
                   </div>
 
@@ -165,37 +168,37 @@ export default function PlayingNow() {
                   }}>
                     <div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px", fontSize: "10px", color: "#4a7c59", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "bold" }}>
-                        <Trophy size={12} /> Completados
+                        <Trophy size={12} /> {t("log_options.completed")}
                       </div>
                       <div style={{ fontSize: "28px", color: "#111", marginTop: "2px", fontWeight: "300" }}>{stats.completed}</div>
                     </div>
                     <div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px", fontSize: "10px", color: "#4a69bd", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "bold" }}>
-                        <Play size={12} /> Jugando
+                        <Play size={12} /> {t("log_options.playing")}
                       </div>
                       <div style={{ fontSize: "28px", color: "#111", marginTop: "2px", fontWeight: "300" }}>{stats.playing}</div>
                     </div>
                     <div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px", fontSize: "10px", color: "#ff7b00", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "bold" }}>
-                        <Flame size={12} /> Guías
+                        <Flame size={12} /> {t("log_options.guides")}
                       </div>
                       <div style={{ fontSize: "28px", color: "#111", marginTop: "2px", fontWeight: "300" }}>{stats.guides}</div>
                     </div>
                     <div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px", fontSize: "10px", color: "#7f8c8d", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "bold" }}>
-                        <Pause size={12} /> Pausados
+                        <Pause size={12} /> {t("log_options.paused")}
                       </div>
                       <div style={{ fontSize: "28px", color: "#111", marginTop: "2px", fontWeight: "300" }}>{stats.paused}</div>
                     </div>
                     <div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px", fontSize: "10px", color: "#8e7cc3", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "bold" }}>
-                        <Gift size={12} /> Wishlist
+                        <Gift size={12} /> {t("log_options.wishlist")}
                       </div>
                       <div style={{ fontSize: "28px", color: "#111", marginTop: "2px", fontWeight: "300" }}>{stats.wishlist}</div>
                     </div>
                     <div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px", fontSize: "10px", color: "#a55c5c", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "bold" }}>
-                        <XCircle size={12} /> Abandonados
+                        <XCircle size={12} /> {t("log_options.dropped")}
                       </div>
                       <div style={{ fontSize: "28px", color: "#111", marginTop: "2px", fontWeight: "300" }}>{stats.dropped}</div>
                     </div>
@@ -209,14 +212,14 @@ export default function PlayingNow() {
                 
                 <div style={{ padding: "15px 15px 0 15px" }}>
                   <h3 style={{ margin: 0, fontSize: "15px", color: "#111", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <Play size={18} color="#4a69bd" strokeWidth={2.5} /> Jugando Ahora
+                    <Play size={18} color="#4a69bd" strokeWidth={2.5} /> {t("label_playing_now")}
                   </h3>
                 </div>
                 
                 <div style={{ padding: "0", minHeight: "150px" }}>
                   {playingGames.length === 0 ? (
                     <div style={{ textAlign: "center", padding: "40px", color: "#666", fontSize: "12px" }}>
-                      No tienes juegos a medias. ¡Empieza uno nuevo!
+                      {t("info_error_empty")}
                     </div>
                   ) : (
                     <div style={{ 

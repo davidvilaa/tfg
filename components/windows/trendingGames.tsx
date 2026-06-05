@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment, Float } from "@react-three/drei";
 import * as THREE from "three";
-import GameCaseCard from "@/components/cards/gameCard"; 
+import GameCaseCard from "@/components/cards/gameCard";
+import { useTranslations } from "next-intl";
 
 function Medalla3D({ url, rank }: { url: string, rank: number }) {
   const { scene } = useGLTF(url);
@@ -84,7 +85,8 @@ export default function TrendingGamesWindow() {
   const [allEntries, setAllEntries] = useState<any[]>([]);
   const [trending, setTrending] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("mensual");
+  const [activeTab, setActiveTab] = useState("monthly");
+  const t = useTranslations("Window - TrendingGames");
   
   const windowRef = useRef(null);
   const router = useRouter();
@@ -117,9 +119,9 @@ export default function TrendingGamesWindow() {
 
     const now = new Date();
     const timeLimit = new Date();
-    if (activeTab === "diario") timeLimit.setDate(now.getDate() - 1);
-    else if (activeTab === "semanal") timeLimit.setDate(now.getDate() - 7);
-    else if (activeTab === "mensual") timeLimit.setMonth(now.getMonth() - 1);
+    if (activeTab === "daily") timeLimit.setDate(now.getDate() - 1);
+    else if (activeTab === "weekly") timeLimit.setDate(now.getDate() - 7);
+    else if (activeTab === "monthly") timeLimit.setMonth(now.getMonth() - 1);
 
     const filtered = allEntries.filter(entry => new Date(entry.created_at) >= timeLimit);
 
@@ -157,7 +159,7 @@ export default function TrendingGamesWindow() {
         <div className="title-bar" style={{ cursor: "grab" }}>
           <div className="title-bar-text" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <Trophy size={14} color="#ffd700" /> 
-            Juegos en Tendencia
+            {t("title")}
           </div>
           <div className="title-bar-controls">
             <button aria-label="Minimize"></button>
@@ -169,7 +171,7 @@ export default function TrendingGamesWindow() {
         <div className="window-body has-space" style={{ margin: 0, padding: 0, backgroundColor: "#f3f4f6" }}>
           
           <ul role="menubar" style={{ margin: 0, padding: "2px 2px", fontSize: "14px", borderBottom: "1px solid rgba(0,0,0,0.1)", display: "flex", listStyle: "none" }}>
-            {["diario", "semanal", "mensual"].map((tab) => (
+            {["daily", "weekly", "monthly"].map((tab) => (
               <li 
                 key={tab}
                 role="menuitem" 
@@ -183,17 +185,17 @@ export default function TrendingGamesWindow() {
                   borderRadius: "3px"
                 }}
               >
-                Top {tab}
+                {"Top" + " " + t(`section_top_options.${tab}`)}
               </li>
             ))}
           </ul>
           
           <div style={{ padding: "0" }}>
             {loading ? (
-              <div style={{ textAlign: "center", padding: "40px", color: "#333" }}>Cargando...</div>
+              <div style={{ textAlign: "center", padding: "40px", color: "#333" }}>{t("info_loading")}</div>
             ) : trending.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px", color: "#666", fontSize: "12px" }}>
-                No hay actividad reciente para mostrar.
+                {t("info_error_empty")}
               </div>
             ) : (
               <div style={{ 

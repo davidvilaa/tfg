@@ -176,5 +176,67 @@
     "label_progress": "Progress",
     "label_tareas": "Tasks",
     "by": "by"
+  },
+  "Window - Feed":{
+    "title": "Activity",
+    "info_loading": "Loading activity...",
+    "section_friends": "Friends",
+    "section_global": "Global",
+    "time_options": {
+      "just_now": "just now",
+      "minutes_ago": "{count}m ago",
+      "hours_ago": "{count}h ago",
+      "yesterday": "yesterday",
+      "days_ago": "{count}d ago"
+    },
+    "log_options": {
+      "completed": "completed",
+      "started": "started playing",
+      "paused": "paused",
+      "dropped": "dropped",
+      "wishlist": "wants to play",
+      "guide_created": "created a guide for",
+      "default": "logged in"
+    },
+    "info_error_login": "Log in to view your friends' activity",
+    "info_error_empty": "No activity to display"
+  },
+  "Window - PlayingNow":{
+    "title": "Personal",
+    "info_loading": "Loading...",
+    "label_welcome":"Welcome",
+    "label_welcome_desc":"Your game collection is waiting for you",
+    "log_options":{
+      "completed":"completed",
+      "playing":"playing",
+      "guides":"guides",
+      "paused":"paused",
+      "wishlist":"wishlist",
+      "dropped":"dropped"
+    },
+    "label_playing_now":"Playing Now",
+    "info_error_login":"Log in to view your games",
+    "info_error_empty":"You have no games in progress"
+  },
+  "Window - TrendingGames":{
+    "title": "Trending Games",
+    "info_loading": "Loading...",
+    "section_top": "Top",
+    "section_top_options":{
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "info_error_empty": "No trending games to display"
+  },
+  "Window - TrendingGuides":{
+    "title": "Trending Guides",
+    "info_loading": "Loading...",
+    "section_top_options":{
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "info_error_empty": "No trending guides to display"
   }
 }

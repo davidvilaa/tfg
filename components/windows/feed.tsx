@@ -7,8 +7,9 @@ import Link from "next/link";
 import { Activity, Trophy, Play, Pause, XCircle, Gift, Clock, Flame } from "lucide-react";
 import MiniGameCaseCard from "@/components/cards/MINIgameCard";
 import MiniGuideCaseCard from "@/components/cards/MINIguideCard";
+import { useTranslations } from "next-intl";
 
-const timeAgo = (dateString: string) => {
+const timeAgo = (dateString: string, t: any) => {
   if (!dateString) return "";
   const now = new Date();
   const past = new Date(dateString);
@@ -17,29 +18,30 @@ const timeAgo = (dateString: string) => {
   const diffHours = Math.floor(diffMins / 60);
   const diffDays = Math.floor(diffHours / 24);
 
-  if (diffMins < 1) return "ahora mismo";
-  if (diffMins < 60) return `hace ${diffMins}m`;
-  if (diffHours < 24) return `hace ${diffHours}h`;
-  if (diffDays === 1) return `ayer`;
-  return `hace ${diffDays}d`;
+  if (diffMins < 1) return t("time_options.just_now");
+  if (diffMins < 60) return t("time_options.minutes_ago", { count: diffMins });
+  if (diffHours < 24) return t("time_options.hours_ago", { count: diffHours });
+  if (diffDays === 1) return t("time_options.yesterday");
+  
+  return t("time_options.days_ago", { count: diffDays });
 };
 
-const getStatusConfig = (status: string) => {
+const getStatusConfig = (status: string, t: any) => {
   switch(status) {
     case 'completed': 
-      return { text: 'ha completado', color: "#4a7c59", icon: <Trophy size={14} /> };
+      return { text: t("log_options.completed"), color: "#4a7c59", icon: <Trophy size={14} /> };
     case 'playing': 
-      return { text: 'ha empezado a jugar a', color: "#4a69bd", icon: <Play size={14} /> };
+      return { text: t("log_options.started"), color: "#4a69bd", icon: <Play size={14} /> };
     case 'paused': 
-      return { text: 'ha pausado', color: "#7f8c8d", icon: <Pause size={14} /> };
+      return { text: t("log_options.paused"), color: "#7f8c8d", icon: <Pause size={14} /> };
     case 'dropped': 
-      return { text: 'ha abandonado', color: "#a55c5c", icon: <XCircle size={14} /> };
+      return { text: t("log_options.dropped"), color: "#a55c5c", icon: <XCircle size={14} /> };
     case 'wishlist': 
-      return { text: 'quiere jugar a', color: "#8e7cc3", icon: <Gift size={14} /> };
+      return { text: t("log_options.wishlist"), color: "#8e7cc3", icon: <Gift size={14} /> };
     case 'guide_created':
-      return { text: 'ha publicado una guía de', color: "#ff7b00", icon: <Flame size={14} fill="#ff7b00" /> };
+      return { text: t("log_options.guide_created"), color: "#ff7b00", icon: <Flame size={14} fill="#ff7b00" /> };
     default: 
-      return { text: 'ha logueado', color: "#636e72", icon: <Activity size={14} /> };
+      return { text: t("log_options.default"), color: "#636e72", icon: <Activity size={14} /> };
   }
 };
 
@@ -49,6 +51,7 @@ export default function FeedWindow() {
   const [activeTab, setActiveTab] = useState("friends");
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const feedRef = useRef(null);
+  const t = useTranslations("Window - Feed");
 
   const getPfpUrl = (path: string | null) => {
     if (!path) return "https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg";
@@ -160,7 +163,7 @@ export default function FeedWindow() {
       >
         <div className="title-bar" style={{ cursor: "grab" }}>
           <div className="title-bar-text" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-            <Activity size={14} /> Actividad
+            <Activity size={14} /> {t("title")}
           </div>
           <div className="title-bar-controls">
             <button aria-label="Minimize"></button>
@@ -192,7 +195,7 @@ export default function FeedWindow() {
               onClick={() => setActiveTab("friends")}
               style={{ cursor: "pointer", padding: "4px 10px" }}
             >
-              Amigos
+              {t("section_friends")}
             </li>
             <li 
               role="menuitem" 
@@ -201,20 +204,20 @@ export default function FeedWindow() {
               onClick={() => setActiveTab("global")}
               style={{ cursor: "pointer", padding: "4px 10px" }}
             >
-              Global
+              {t("section_global")}
             </li>
           </ul>
           
           <div style={{ padding: "10px" }}>
             {loading ? (
-              <div style={{ textAlign: "center", padding: "40px", color: "#333" }}>Cargando...</div>
+              <div style={{ textAlign: "center", padding: "40px", color: "#333" }}>{t("info_loading")}</div>
             ) : activeTab === "friends" && !currentUserId ? (
               <div style={{ textAlign: "center", padding: "40px", color: "#666", fontSize: "12px" }}>
-                Inicia sesión para ver la actividad de tus amigos.
+                {t("info_error_login")}
               </div>
             ) : feed.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px", color: "#666", fontSize: "12px" }}>
-                Aún no hay actividad.
+                {t("info_error_empty")}
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxHeight: "470px", overflowY: "auto", paddingRight: "5px" }}>
@@ -222,10 +225,10 @@ export default function FeedWindow() {
                   if (!item.profiles || !item.games) return null;
 
                   const uniqueKey = item.isGuide ? `guide-${item.id}` : `game-${item.user_id}-${item.game_id}-${item.created_at}`;
-                  const statusConfig = getStatusConfig(item.status);
+                  const statusConfig = getStatusConfig(item.status, t);
                   const userPfpUrl = getPfpUrl(item.profiles.pfp_url);
                   
-                  const actionLink = item.isGuide 
+                  const actionLink = item.isGuide   
                     ? `/game/${item.games.id}/guide/${item.id}`
                     : `/game/${item.games.id}`;
 
@@ -241,7 +244,7 @@ export default function FeedWindow() {
                         boxShadow: "0 2px 4px rgba(0,0,0,0.05)"
                       }}
                     >
-                      {/* CROMO CONDICIONAL */}
+  
                       <div style={{ width: item.isGuide ? "70px" : "50px", flexShrink: 0 }}>
                         {item.isGuide ? (
                           <MiniGuideCaseCard 
@@ -257,8 +260,6 @@ export default function FeedWindow() {
                       </div>
 
                       <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: "2px" }}>
-                        
-                        {/* Cabecera: Avatar, Nombre y Tiempo (SIN NEGRITA) */}
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                             <img 
@@ -271,11 +272,10 @@ export default function FeedWindow() {
                             </Link>
                           </div>
                           <div style={{ fontSize: "10px", color: "#777", display: "flex", alignItems: "center", gap: "3px" }}>
-                            <Clock size={10} /> {timeAgo(item.created_at)}
+                            <Clock size={10} /> {timeAgo(item.created_at, t)}
                           </div>
                         </div>
                         
-                        {/* TEXTO EN DOS LÍNEAS (Todo en minúsculas y sin negrita) */}
                         <div style={{ display: "flex", flexDirection: "column" }}>
                           <span style={{ 
                             display: "flex", 
@@ -283,7 +283,7 @@ export default function FeedWindow() {
                             gap: "4px", 
                             fontSize: "12px", 
                             color: statusConfig.color,
-                            textTransform: "none", // Forzamos minúsculas
+                            textTransform: "none",
                             letterSpacing: "0px"
                           }}>
                             {statusConfig.icon} {statusConfig.text}
@@ -305,7 +305,6 @@ export default function FeedWindow() {
                             {item.games.title}
                           </Link>
                         </div>
-
                       </div>
                     </div>
                   );

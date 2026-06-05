@@ -9,6 +9,7 @@ import GuideCaseCard from "@/components/cards/guideCard";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment, Float } from "@react-three/drei";
 import * as THREE from "three";
+import { useTranslations } from "next-intl";
 
 function Medalla3D({ url, rank }: { url: string, rank: number }) {
   const { scene } = useGLTF(url);
@@ -87,6 +88,7 @@ export default function TrendingWindow() {
   const [trending, setTrending] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("mensual");
+  const t = useTranslations("Window - TrendingGuides");
   
   const windowRef = useRef(null);
   const router = useRouter();
@@ -160,7 +162,7 @@ export default function TrendingWindow() {
         <div className="title-bar" style={{ cursor: "grab" }}>
           <div className="title-bar-text" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <Flame size={14} color="#ff7b00" style={{ filter: "drop-shadow(0 0 2px rgba(255,123,0,0.8))" }} /> 
-            Top Guías de la Comunidad
+            {t("title")}
           </div>
           <div className="title-bar-controls">
             <button aria-label="Minimize"></button>
@@ -192,7 +194,7 @@ export default function TrendingWindow() {
               onClick={() => setActiveTab("diario")}
               style={{ cursor: "pointer", padding: "4px 10px" }}
             >
-              Top Diario
+              Top {t("section_top_options.daily")}
             </li>
             <li 
               role="menuitem" 
@@ -201,7 +203,7 @@ export default function TrendingWindow() {
               onClick={() => setActiveTab("semanal")}
               style={{ cursor: "pointer", padding: "4px 10px" }}
             >
-              Top Semanal
+              Top {t("section_top_options.weekly")}
             </li>
             <li 
               role="menuitem" 
@@ -210,16 +212,16 @@ export default function TrendingWindow() {
               onClick={() => setActiveTab("mensual")}
               style={{ cursor: "pointer", padding: "4px 10px" }}
             >
-              Top Mensual
+              Top {t("section_top_options.monthly")}
             </li>
           </ul>
           
           <div style={{ padding: "0" }}>
             {loading ? (
-              <div style={{ textAlign: "center", padding: "40px", color: "#333" }}>Cargando...</div>
+              <div style={{ textAlign: "center", padding: "40px", color: "#333" }}>{t("info_loading")}</div>
             ) : trending.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px", color: "#666", fontSize: "12px" }}>
-                Aún no hay guías destacadas para este periodo.
+                {t("info_error_empty")}
               </div>
             ) : (
               <div style={{ 

@@ -13,7 +13,7 @@
   },
   "Login":{
     "title": "Iniciar Sesión - Trophyd",
-    "label_email": "Correo electrónico",
+    "label_email": "Correo",
     "input_email": "tu@email.com",
     "label_password": "Contraseña",
     "btn_iniciar_sesion": "Iniciar Sesión",
@@ -21,5 +21,18 @@
     "si_no_tienes_cuenta": "si no tienes cuenta",
     "btn_si_no_tienes_cuenta": "Crea una cuenta nueva",
     "error_incorrect_credentials": "Correo o contraseña incorrectos"
+  },
+  "Register":{
+    "title": "Registrarse - Trophyd",
+    "label_username": "Usuario",
+    "input_username": "ninjaTrophy99",
+    "label_email": "Correo",
+    "input_email": "tu@email.com",
+    "label_password": "Contraseña",
+    "btn_registrarse": "Crear Cuenta",
+    "btn_registrarse_loading": "Creando Cuenta...",
+    "si_ya_tienes_cuenta": "si ya tienes cuenta",
+    "btn_si_ya_tienes_cuenta": "Iniciar sesión",
+    "error_incorrect_credentials": "La cuenta se creó, pero hubo un error al guardar el nombre de usuario"
   }
 }

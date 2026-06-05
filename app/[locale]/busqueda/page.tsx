@@ -8,6 +8,7 @@ import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { MoveLeft, MoveRight, X, House, FileEdit } from "lucide-react";
 import { useNotification } from "@/components/NotificationProvider";
+import { useTranslations } from "next-intl";
 
 export default function BusquedaPage() {
   const searchParams = useSearchParams();
@@ -34,6 +35,8 @@ export default function BusquedaPage() {
   const [userId, setUserId] = useState<string | null>(null);
 
   const { showNotification } = useNotification();
+
+  const t = useTranslations("Search");
 
   useEffect(() => {
     const comprobarSesion = async () => {
@@ -180,10 +183,10 @@ export default function BusquedaPage() {
         
         <ul role="menubar" style={{ fontSize: "16px", backgroundColor: "#fff", position: "relative" }}>
           <li role="menuitem" tabIndex={0} onClick={() => setActiveTab("games")} className={activeTab === "games" ? "tab-activa" : ""}>
-            Juegos ({juegos.length}{hasMore && juegos.length > 0 ? "+" : ""})
+            {t("games_title")} ({juegos.length}{hasMore && juegos.length > 0 ? "+" : ""})
           </li>
           <li role="menuitem" tabIndex={0} onClick={() => setActiveTab("users")} className={activeTab === "users" ? "tab-activa" : ""}>
-            Usuarios ({usuarios.length})
+            {t("users_title")} ({usuarios.length})
           </li>
         </ul>
       </div>
@@ -214,7 +217,7 @@ export default function BusquedaPage() {
           </div>
 
           <div ref={observerTarget} style={{ height: "20px", width: "100%", marginTop: "20px" }}>
-            {cargando && <p style={{ textAlign: "center", color: "white", fontWeight: "bold" }}>Cargando más juegos...</p>}
+            {cargando && <p style={{ textAlign: "center", color: "white", fontWeight: "bold" }}>{t("games_searching")}</p>}
           </div>
         </>
       )}
@@ -222,7 +225,7 @@ export default function BusquedaPage() {
       {activeTab === "users" && (
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           {cargandoUsuarios ? (
-            <p style={{ textAlign: "center", color: "white", fontWeight: "bold" }}>Buscando usuarios...</p>
+            <p style={{ textAlign: "center", color: "white", fontWeight: "bold" }}>{t("users_searching")}</p>
           ) : usuarios.length > 0 ? (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "20px" }}>
               {usuarios.map(user => (
@@ -250,7 +253,7 @@ export default function BusquedaPage() {
             </div>
           ) : (
             <p style={{ textAlign: "center", color: "white", fontWeight: "bold" }}>
-              No se encontraron usuarios con "{query}".
+              {t("info_user_searching_not_found")}
             </p>
           )}
         </div>

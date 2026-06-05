@@ -63,5 +63,12 @@
     "info_password_updated_error_credentials": "Error updating password: incorrect credentials",
     "info_password_updated_success": "Password updated successfully",
     "info_password_updated_error_default": "Error updating password"
+  },
+  "Search":{
+    "games_title": "Games",
+    "games_searching": "Searching games...",
+    "users_title": "Users",
+    "users_searching": "Searching users...",
+    "info_user_searching_not_found": "No users found"
   }
 }

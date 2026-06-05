@@ -141,5 +141,32 @@
     "btn_write_guide": "Write Guide",
     "info_guides_empty": "There are no guides for this game yet.",
     "info_network_empty": "No friends have registered this game yet"
+  },
+  "Guide - Write":{
+    "section_back": "Back",
+    "section_definition": "Definition",
+    "section_write": "Writing",
+    "section_checklist": "Checklist",
+    "section_see_guide": "See Guide",
+    "btn_update": "Update",
+    "btn_publish": "Publish",
+    "section_title_photo": "Cover",
+    "btn_change_photo": "Change Photo",
+    "section_information": "Information",
+    "label_title": "Title",
+    "label_hours": "Hours",
+    "label_difficulty": "Difficulty",
+    "label_section": "Section",
+    "input_section_title": "Title...",
+    "btn_edit": "Edit",
+    "btn_preview": "Preview",
+    "input_write": "Write here...",
+    "input_write_preview_empty": "Nothing written yet...",
+    "btn_new_section": "New Section",
+    "default_section_title": "Introduction",
+    "btn_new_task": "New Task",
+    "input_task": "Task...",
+    "info_error_empty_title": "The title cannot be empty",
+    "info_saved": "Guide saved successfully"
   }
 }

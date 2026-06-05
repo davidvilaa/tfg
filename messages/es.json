@@ -141,5 +141,32 @@
     "btn_write_guide": "Escribir guía",
     "info_guides_empty": "Aún no hay guías para este juego.",
     "info_network_empty": "Ningún amigo ha registrado este juego todavía"
+  },
+  "Guide - Write":{
+    "section_back": "Volver",
+    "section_definition": "Definición",
+    "section_write": "Escritura",
+    "section_checklist": "Checklist",
+    "section_see_guide": "Ver guía",
+    "btn_update": "Actualizar",
+    "btn_publish": "Publicar",
+    "section_title_photo": "Portada",
+    "btn_change_photo": "Cambiar foto",
+    "section_information": "Información",
+    "label_title": "Título",
+    "label_hours": "Horas",
+    "label_difficulty": "Dificultad",
+    "label_section": "Sección",
+    "input_section_title": "Título...",
+    "btn_edit": "Editar",
+    "btn_preview": "Vista Previa",
+    "input_write": "Escribe aquí...",
+    "input_write_preview_empty": "Nada que mostrar todavía...",
+    "btn_new_section": "Nueva sección",
+    "default_section_title": "Introducción",
+    "btn_new_task": "Nueva tarea",
+    "input_task": "Tarea...",
+    "info_error_empty_title": "El título no puede estar vacío",
+    "info_saved": "Guía guardada correctamente"
   }
 }

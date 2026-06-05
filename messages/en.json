@@ -125,5 +125,21 @@
     "btn_following_follow": "Follow",
     "btn_following_unfollow": "Unfollow",
     "btn_following_empty": "This user is not following anyone yet"
+  },
+  "Game":{
+    "info_loading": "Loading game information...",
+    "section_stats": "Community Statistics",
+    "stats_average_rating": "Average Rating",
+    "stats_average_difficulty": "Average Difficulty",
+    "stats_average_time": "Average Time",
+    "section_guides": "Community Guides",
+    "label_sortby_options":{
+      "most_voted": "Most Voted",
+      "newest": "Newest",
+      "oldest": "Oldest"
+    },
+    "btn_write_guide": "Write Guide",
+    "info_guides_empty": "There are no guides for this game yet.",
+    "info_network_empty": "No friends have registered this game yet"
   }
 }

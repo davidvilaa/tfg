@@ -10,6 +10,7 @@ import GameCard3D from "@/components/gameCard3D";
 import { View } from "@react-three/drei";
 import { useNotification } from "@/components/NotificationProvider";
 import GuideCaseCard from "@/components/cards/guideCard";
+import { useTranslations } from "next-intl";
 
 export default function GamePage() {
   const params = useParams();
@@ -44,6 +45,8 @@ export default function GamePage() {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   const { showNotification } = useNotification();
+  
+  const t = useTranslations("Game");
 
   useEffect(() => {
     const fetchGameInfo = async () => {
@@ -194,7 +197,7 @@ export default function GamePage() {
         setFollowingVotes(votes || []);
 
       } catch (error: any) {
-        console.error("Error catastrófico en Following:", error.message || error);
+        console.error("Error en Following:", error.message || error);
       }
     };
 
@@ -210,7 +213,7 @@ export default function GamePage() {
     fetchFollowingVotes();
   }, [gameId]);
 
-  if (loading) return <div style={{ padding: "50px", textAlign: "center" }}>Cargando datos del juego...</div>;
+  if (loading) return <div style={{ padding: "50px", textAlign: "center" }}>{t("info_loading")}</div>;
 
   const escalasRating = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   const escalasDiff = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -255,7 +258,7 @@ export default function GamePage() {
                 consola="pc" 
                 isFocused={false}
                 onClick={() => {
-                  console.log("¡Click en el 3D! Aquí abriremos el modal para loguear.");
+                  console.log("Click en el 3D");
                 }}
               />
             ) : (
@@ -263,7 +266,7 @@ export default function GamePage() {
             )}
           </div>
         <fieldset style={{ padding: "15px", backgroundColor: "#fff", border: "1px solid #ccc", display: "flex", flexDirection: "column", gap: "25px" }}>
-            <legend style={{ fontSize: "16px", padding: "0 5px" }}>Community Stats</legend>
+            <legend style={{ fontSize: "16px", padding: "0 5px" }}>{t("section_stats")}</legend>
             
             <style>{`
               .stat-bar {
@@ -285,7 +288,7 @@ export default function GamePage() {
 
             <div>
               <div style={{ textAlign: "center", marginBottom: "15px" }}>
-                <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>Nota media</span>
+                <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>{t("stats_average_rating")}</span>
                 <div style={{ fontSize: "28px", color: "#111", marginTop: "2px" }}>
                   {stats.avgRating > 0 ? `${stats.avgRating} ★` : "--"}
                 </div>
@@ -312,7 +315,7 @@ export default function GamePage() {
 
             <div>
               <div style={{ textAlign: "center", marginBottom: "15px" }}>
-                <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>Dificultad media</span>
+                <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>{t("stats_average_difficulty")}</span>
                 <div style={{ fontSize: "28px", color: "#111", marginTop: "2px" }}>
                   {stats.avgDifficulty > 0 ? `${stats.avgDifficulty}` : "--"}
                 </div>
@@ -338,7 +341,7 @@ export default function GamePage() {
             </div>
 
             <div style={{ textAlign: "center", paddingTop: "5px", borderTop: "1px solid #eee" }}>
-              <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>Tiempo medio</span>
+              <span style={{ fontSize: "12px", color: "#666", textTransform: "uppercase", letterSpacing: "1px" }}>{t("stats_average_time")}</span>
               <div style={{ fontSize: "28px", color: "#111", marginTop: "2px" }}>
                 {stats.avgTime > 0 ? `${stats.avgTime}h` : "--h"}
               </div>
@@ -358,7 +361,7 @@ export default function GamePage() {
           <fieldset style={{ padding: "20px", backgroundColor: "#fff", border: "1px solid #ccc", minHeight: "250px" }}>
             
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", borderBottom: "1px solid #eee", paddingBottom: "10px", flexWrap: "wrap", gap: "10px" }}>
-              <legend style={{ fontSize: "18px", padding: "0 5px", margin: 0 }}>Guías de la Comunidad ({guides.length})</legend>
+              <legend style={{ fontSize: "18px", padding: "0 5px", margin: 0 }}>{t("section_guides")}</legend>
               
               <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px" }}>
@@ -366,11 +369,11 @@ export default function GamePage() {
                     id="guideSortBy" 
                     value={guideSortBy} 
                     onChange={(e) => setGuideSortBy(e.target.value)}
-                    style={{ padding: "0 8px", fontSize: "13px", height: "28px", borderRadius: "3px", border: "1px solid #ccc", backgroundColor: "#fff", cursor: "pointer" }}
+                    style={{ padding: "0 8px", fontSize: "13px", height: "28px", borderRadius: "3px", border: "1px solid #ccc", backgroundColor: "#fff", cursor: "pointer", width: "120px" }}
                   >
-                    <option value="most_liked">Más votadas</option>
-                    <option value="newest">Más recientes</option>
-                    <option value="oldest">Más antiguas</option>
+                    <option value="most_liked">{t("label_sortby_options.most_voted")}</option>
+                    <option value="newest">{t("label_sortby_options.newest")}</option>
+                    <option value="oldest">{t("label_sortby_options.oldest")}</option>
                   </select>
                 </div>
 
@@ -385,7 +388,7 @@ export default function GamePage() {
                   }}
                   style={{ padding: "0 12px", height: "28px", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", margin: 0 }}
                 >
-                  + Escribir Guía
+                  + {t("btn_write_guide")}
                 </button>
               </div>
             </div>
@@ -409,7 +412,7 @@ export default function GamePage() {
               </div>
             ) : (
               <div style={{ textAlign: "center", padding: "40px 20px", color: "#6b7280", display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-                <p style={{ margin: 0 }}>Nadie ha escrito una guía para este juego todavía.</p>
+                <p style={{ margin: 0 }}>{t("info_guides_empty")}</p>
               </div>
             )}
 
@@ -473,7 +476,7 @@ export default function GamePage() {
                 ))
               ) : (
                 <div style={{ textAlign: "center", padding: "20px 10px", color: "#888", fontSize: "13px" }}>
-                  Ninguno de tus amigos ha logueado este juego todavía.
+                  {t("info_network_empty")}
                 </div>
               )}
             </div>

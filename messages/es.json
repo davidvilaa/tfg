@@ -87,7 +87,7 @@
   "Profile - Profile":{
     "info_loading": "Cargando estadísticas...",
     "section_ratings": "Calificaciones",
-    "label_average_rating": "NOTA MEDIA",
+    "label_average_rating": "Nota media",
     "section_favorite_games": "Juegos favoritos"
   },
   "Profile - Games":{
@@ -125,5 +125,21 @@
     "btn_following_follow": "Seguir",
     "btn_following_unfollow": "Dejar de seguir",
     "btn_following_empty": "Este usuario aún no sigue a ningún usuario"
+  },
+  "Game":{
+    "info_loading": "Cargando información del juego...",
+    "section_stats": "Estadísticas Comunitarias",
+    "stats_average_rating": "Nota media",
+    "stats_average_difficulty": "Dificultad media",
+    "stats_average_time": "Tiempo medio",
+    "section_guides": "Guías de la Comunidad",
+    "label_sortby_options":{
+      "most_voted": "Más votadas",
+      "newest": "Más recientes",
+      "oldest": "Más antiguas"
+    },
+    "btn_write_guide": "Escribir guía",
+    "info_guides_empty": "Aún no hay guías para este juego.",
+    "info_network_empty": "Ningún amigo ha registrado este juego todavía"
   }
 }

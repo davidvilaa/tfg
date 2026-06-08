@@ -265,19 +265,28 @@ export default function GamePage() {
         <div style={{ width: "240px", flexShrink: 0, display: "flex", flexDirection: "column", gap: "20px" }}>
           <div style={{ width: "100%", aspectRatio: "3/4", position: "relative", cursor: "pointer", zIndex: 10 }}>
             {gameData.cover_image_url ? (
-              <GameCard3D
-                coverUrl={gameData.cover_image_url}
-                consola="pc" 
-                isFocused={false}
-                onClick={() => {
-                  setFocusedGame({
-                    id: Number(gameId),
-                    titulo: gameData.title,
-                    portada: gameData.cover_image_url,
-                    todasLasConsolas: gameData.platforms || ["pc"] 
-                  });
-                }}
-              />
+              (() => {
+                const plataformaPrincipal = gameData.platforms && gameData.platforms.length > 0 
+                  ? gameData.platforms[0] 
+                  : "pc";
+
+                return (
+                  <GameCard3D
+                    coverUrl={gameData.cover_image_url}
+                    consola={plataformaPrincipal}
+                    isFocused={false}
+                    onClick={() => {
+                      setFocusedGame({
+                        id: Number(gameId),
+                        titulo: gameData.title,
+                        portada: gameData.cover_image_url,
+                        todasLasConsolas: gameData.platforms || ["pc"],
+                        platform: plataformaPrincipal 
+                      });
+                    }}
+                  />
+                );
+              })()
             ) : (
               <div style={{ width: "100%", height: "100%", border: "4px solid #fff", backgroundColor: "#ccc" }} />
             )}

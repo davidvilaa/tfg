@@ -4,11 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Eraser,} from "lucide-react";
-import GameCard3DFOCUS from "@/components/gameCard3DFOCUS";
-import GameCard3D from "@/components/gameCard3D";
 import GameCaseCard from "@/components/cards/gameCard";
-import { Canvas } from "@react-three/fiber";
-import { View } from "@react-three/drei";
 import { useNotification } from "@/components/NotificationProvider";
 import { useTranslations } from "next-intl";
 
@@ -28,7 +24,6 @@ export default function ProfileGamesPage() {
   const [sortBy, setSortBy] = useState("added_desc");
 
   const mainRef = useRef<HTMLDivElement>(null!);
-  const [focusedGame, setFocusedGame] = useState<any | null>(null);
 
   const { showNotification } = useNotification();
 
@@ -69,15 +64,6 @@ export default function ProfileGamesPage() {
   useEffect(() => {
     if (targetNickname) cargarJuegos();
   }, [targetNickname]);
-
-  useEffect(() => {
-    if (focusedGame) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => { document.body.style.overflow = "auto"; };
-  }, [focusedGame]);
 
   const clearFilters = () => {
     setFilterRating("all");
@@ -197,15 +183,7 @@ export default function ProfileGamesPage() {
               <GameCaseCard 
                 key={juego.game_id}
                 gameData={juego}
-                onClick={() => {
-                  setFocusedGame({
-                    id: juego.game_id,
-                    titulo: juego.games.title,
-                    portada: juego.games.cover_image_url,
-                    platform: juego.platform,
-                    todasLasConsolas: juego.games.platforms
-                  });
-                }}
+                onClick={() => router.push(`/game/${juego.game_id}`)}
               />
             ))
           ) : (
@@ -213,23 +191,6 @@ export default function ProfileGamesPage() {
           )}
         </div>
       </fieldset>
-
-      {focusedGame && (
-        <GameCard3DFOCUS
-          focusedGame={focusedGame}
-          userId={currentUserId} 
-          showNotification={showNotification}
-          onClose={() => setFocusedGame(null)}
-        />
-      )}
-
-      <Canvas
-        eventSource={mainRef}
-        style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 10 }}
-        camera={{ position: [0, 0, 22], fov: 20 }}
-      >
-        <View.Port />
-      </Canvas>
     </div>
   );
 }

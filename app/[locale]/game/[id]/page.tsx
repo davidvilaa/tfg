@@ -7,6 +7,7 @@ import { Clock, Dumbbell, Award} from "lucide-react";
 import { Canvas } from "@react-three/fiber";
 import { PresentationControls, Environment, ContactShadows } from "@react-three/drei";
 import GameCard3D from "@/components/gameCard3D";
+import GameCard3DFOCUS from "@/components/gameCard3DFOCUS";
 import { View } from "@react-three/drei";
 import { useNotification } from "@/components/NotificationProvider";
 import GuideCaseCard from "@/components/cards/guideCard";
@@ -43,6 +44,17 @@ export default function GamePage() {
   const [followingVotes, setFollowingVotes] = useState<any[]>([]);
 
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  const [focusedGame, setFocusedGame] = useState<any | null>(null);
+
+  useEffect(() => {
+    if (focusedGame) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => { document.body.style.overflow = "auto"; };
+  }, [focusedGame]);
 
   const { showNotification } = useNotification();
   
@@ -258,7 +270,12 @@ export default function GamePage() {
                 consola="pc" 
                 isFocused={false}
                 onClick={() => {
-                  console.log("Click en el 3D");
+                  setFocusedGame({
+                    id: Number(gameId),
+                    titulo: gameData.title,
+                    portada: gameData.cover_image_url,
+                    todasLasConsolas: gameData.platforms || ["pc"] 
+                  });
                 }}
               />
             ) : (
@@ -483,6 +500,14 @@ export default function GamePage() {
           </fieldset>
         </div>
       </div>
+      {focusedGame && (
+        <GameCard3DFOCUS
+          focusedGame={focusedGame}
+          userId={currentUserId}
+          showNotification={showNotification}
+          onClose={() => setFocusedGame(null)}
+        />
+      )}
       <Canvas
         eventSource={mainRef}
         style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 10 }}

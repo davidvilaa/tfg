@@ -72,6 +72,9 @@ The primary goal is to deliver an ultra-fast, scalable, and visually stunning pl
 
 ## Environment Setup
 
+> ❗**Note:** If you just want to browse and use the app, please use the [Live Demo](https://trophyd-nmdjsywdy-davidvilaa-s-projects.vercel.app/es). The following instructions are strictly for developers looking to run the project locally or contribute.
+
+The following instructions are for developers looking to contribute).*
 The project is ready to run in local Node.js environments. Active Supabase and IGDB credentials are required.
 
 ```bash

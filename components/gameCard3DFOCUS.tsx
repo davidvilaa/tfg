@@ -20,7 +20,9 @@ export default function GameFocusModal({
 }: GameFocusModalProps) {
   const router = useRouter();
   
-  const [consolaFocus, setConsolaFocus] = useState<string | null>(focusedGame.platform || "pc");
+  const [consolaFocus, setConsolaFocus] = useState<string | null>(
+    focusedGame.consola || focusedGame.platform || (focusedGame.todasLasConsolas && focusedGame.todasLasConsolas.length > 0 ? focusedGame.todasLasConsolas[0] : "pc")
+  );
   const [isLogging, setIsLogging] = useState(false);
 
   useEffect(() => {

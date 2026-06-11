@@ -5,7 +5,6 @@
 <p align="center">
   <a href="https://trophyd-nmdjsywdy-davidvilaa-s-projects.vercel.app/es" target="_blank"><img src="https://img.shields.io/badge/Launch_App-Live_Demo-FF4500?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"></a>
   <img src="https://img.shields.io/badge/Framework-Next.js%2015-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js">
-  <img src="https://img.shields.io/badge/Language-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase">
 </p>
 

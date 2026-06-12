@@ -19,7 +19,7 @@ export default function GuideReadingPage() {
 
   const [loading, setLoading] = useState(true);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
-  const [gameData, setGameData] = useState<any>({ title: "Cargando...", banner_url: "" });
+  const [gameData, setGameData] = useState<any>({ title: "...", banner_url: "" });
   const [guideData, setGuideData] = useState<any>(null);
   const [sections, setSections] = useState<any[]>([]);
   const [markedChecks, setMarkedChecks] = useState<Set<string>>(new Set());

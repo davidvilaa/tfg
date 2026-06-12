@@ -17,7 +17,7 @@ export default function WriteGuidePage() {
   const gameId = params.id as string;
 
   const [loadingGame, setLoadingGame] = useState(true);
-  const [gameData, setGameData] = useState<any>({ title: "Cargando...", banner_url: "" });
+  const [gameData, setGameData] = useState<any>({ title: "...", banner_url: "" });
   
   const [activeTab, setActiveTab] = useState<"def" | "guide" | "checklist">("def");
   const [isSaving, setIsSaving] = useState(false);

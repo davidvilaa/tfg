@@ -113,17 +113,98 @@ export default function Navbar() {
             Trophy<span style={{ color: "#BBBBBB" }}>d</span>
           </span>
         </Link>
-
         <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+          <div style={{ position: "relative", display: "flex", alignItems: "center" }}> 
+            <button 
+              type="button" 
+              onClick={() => {
+                setIsLangMenuOpen(!isLangMenuOpen);
+                setIsMenuOpen(false);
+              }}
+              style={{ 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center",
+                gap: "8px", 
+                cursor: "pointer", 
+                padding: "0 10px", 
+                height: "28px",
+                boxSizing: "border-box"
+              }}
+            >
+              <span className={`fi ${currentLocale === 'es' ? 'fi-es' : 'fi-gb'}`} style={{ borderRadius: "2px" }}></span>
+              <strong style={{ fontSize: "14px", color: "#000", textShadow: "0 0 3px rgba(255,255,255,0.8)", textTransform: "uppercase" }}>
+                {currentLocale}
+              </strong>
+              <ChevronDown size={14} style={{ color: "#000" }} />
+            </button>
+
+            {isLangMenuOpen && (
+              <div style={{
+                position: "absolute",
+                top: "100%",
+                right: 0,
+                marginTop: "8px",
+                minWidth: "150px",
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255, 255, 255, 0.5)",
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.2)",
+                borderRadius: "4px",
+                padding: "8px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "6px",
+                zIndex: 100
+              }}>
+                
+                <button type="button" onClick={() => changeLanguage('es')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span className="fi fi-es" style={{ borderRadius: "2px" }}></span> Español
+                </button>
+
+                <button type="button" onClick={() => changeLanguage('en')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span className="fi fi-gb" style={{ borderRadius: "2px" }}></span> English
+                </button>
+
+              </div>
+            )}
+          </div>
           {loading ? (
-            <div style={{ width: "100px", height: "30px" }}></div>
+            <div style={{ width: "100px", height: "28px" }}></div>
           ) : !user ? (
-            <section className="field-row" style={{ display: "flex", margin: 0, gap: "15px" }}>
-              <Link href="/login">
-                <button type="button">{t('login')}</button>
+            <section className="field-row" style={{ display: "flex", margin: 0, gap: "5px", alignItems: "center" }}>
+              <Link href="/login" style={{ display: "flex", alignItems: "center" }}>
+                <button 
+                  type="button"
+                  style={{ 
+                    height: "28px",
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "center",
+                    padding: "0 12px",
+                    cursor: "pointer",
+                    boxSizing: "border-box"
+                  }}
+                >
+                  {t('login')}
+                </button>
               </Link>
-              <Link href="/register">
-                <button className="default">{t('register')}</button>
+              <Link href="/register" style={{ display: "flex", alignItems: "center" }}>
+                <button 
+                  className="default"
+                  style={{ 
+                    height: "28px",
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "center",
+                    padding: "0 12px",
+                    cursor: "pointer",
+                    boxSizing: "border-box"
+                  }}
+                >
+                  {t('register')}
+                </button>
               </Link>
             </section>
           ) : (
@@ -139,55 +220,6 @@ export default function Navbar() {
                 />
                 <button type="submit" aria-label="search" style={{ height: "93%" }}></button>
               </form>
-
-              <div style={{ position: "relative" }}> 
-                <button 
-                  type="button" 
-                  onClick={() => {
-                    setIsLangMenuOpen(!isLangMenuOpen);
-                    setIsMenuOpen(false);
-                  }}
-                  style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", padding: "4px 8px" }}
-                >
-                  <span className={`fi ${currentLocale === 'es' ? 'fi-es' : 'fi-gb'}`} style={{ borderRadius: "2px" }}></span>
-                  <strong style={{ fontSize: "14px", color: "#000", textShadow: "0 0 3px rgba(255,255,255,0.8)", textTransform: "uppercase" }}>
-                    {currentLocale}
-                  </strong>
-                  <ChevronDown size={14} style={{ color: "#000" }} />
-                </button>
-
-                {isLangMenuOpen && (
-                  <div style={{
-                    position: "absolute",
-                    top: "100%",
-                    right: 0,
-                    marginTop: "8px",
-                    minWidth: "150px",
-                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)",
-                    backdropFilter: "blur(16px)",
-                    WebkitBackdropFilter: "blur(16px)",
-                    border: "1px solid rgba(255, 255, 255, 0.5)",
-                    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.2)",
-                    borderRadius: "4px",
-                    padding: "8px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "6px",
-                    zIndex: 100
-                  }}>
-                    
-                    <button type="button" onClick={() => changeLanguage('es')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
-                      <span className="fi fi-es" style={{ borderRadius: "2px" }}></span> Español
-                    </button>
-
-                    <button type="button" onClick={() => changeLanguage('en')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
-                      <span className="fi fi-gb" style={{ borderRadius: "2px" }}></span> English
-                    </button>
-
-                  </div>
-                )}
-              </div>
-
               <div style={{ position: "relative" }}> 
                 <button 
                   type="button" 
@@ -195,7 +227,16 @@ export default function Navbar() {
                     setIsMenuOpen(!isMenuOpen);
                     setIsLangMenuOpen(false);
                   }}
-                  style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", padding: "4px 8px" }}
+                  style={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "center",
+                    gap: "8px", 
+                    cursor: "pointer", 
+                    padding: "0 8px",
+                    height: "28px",
+                    boxSizing: "border-box"
+                  }}
                 >
                   <User size={16} color="#0044aa" />
                   <strong style={{ fontSize: "14px", color: "#000", textShadow: "0 0 3px rgba(255,255,255,0.8)" }}>

@@ -1,4 +1,15 @@
 {
+  "WelcomeLanding":{
+    "subtitle": "Track what you play, create guides, and build your dream profile.",
+    "trending_title": "Trending Today",
+    "what_is": "What is ",
+    "feature_1_title": "Your Collection Comes to Life",
+    "feature_1": "Log your games through a unique visual ecosystem. Your favorite titles are displayed on your profile as interactive 3D cases simulating their original platform (PS5, N64, GameBoy, Switch, etc.). Relive the magic of owning a physical collection, now in digital format and always at hand.",
+    "feature_2_title": "Show Off Your Trophies",
+    "feature_2": "Log your 100% completed games, rate them, write reviews, and connect with other trophy hunters. Discover what your friends are playing, build your backlog, and show off your hardest achievements to the community.",
+    "feature_3_title": "Become a Legend",
+    "feature_3": "Help others get the most out of their games by creating detailed guides and step-by-step checklists. Join us and together we will build the ultimate library for the completionist community."
+  },
   "Home": {
     "title": "Welcome to TrophyD",
     "subtitle": "Track your completions"

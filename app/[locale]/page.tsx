@@ -1,3 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import WelcomeLanding from "@/components/welcomeLanding";
+
 import Feed from "@/components/windows/feed";
 import PlayingNow from "@/components/windows/playingNow";
 import TrendingGames from "@/components/windows/trendingGames";
@@ -7,6 +13,32 @@ import { useTranslations } from 'next-intl';
 
 export default function Home() {
   const t = useTranslations('Home');
+
+  const [session, setSession] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      setSession(data.session);
+      setLoading(false);
+    };
+    
+    checkSession();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div style={{ display: "flex", justifyContent: "center", marginTop: "100px" }}>...</div>;
+  }
+
+  if (!session) {
+    return <WelcomeLanding />;
+  }
 
   return (
     <>

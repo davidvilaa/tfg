@@ -22,10 +22,10 @@ export default function GamePage() {
   const [loading, setLoading] = useState(true);
   
   const [gameData, setGameData] = useState<any>({
-    title: "Cargando Título...",
+    title: "...",
     cover_image_url: "",
     banner_url: "",
-    summary: "Cargando información del juego...",
+    summary: "...",
   });
 
   const [stats, setStats] = useState({

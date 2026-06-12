@@ -3,7 +3,7 @@
 # 🏆 TrophyD: The Completionist Social Network
 
 <p align="center">
-  <a href="trophyd.vercel.app" target="_blank"><img src="https://img.shields.io/badge/Launch_App-Live_Demo-FF4500?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"></a>
+  <a href="https://trophyd.vercel.app" target="_blank"><img src="https://img.shields.io/badge/Launch_App-Live_Demo-FF4500?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"></a>
   <img src="https://img.shields.io/badge/Framework-Next.js%2015-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js">
   <img src="https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase">
 </p>
@@ -72,7 +72,7 @@ The primary goal is to deliver an ultra-fast, scalable, and visually stunning pl
 
 ## Environment Setup
 
-> ❗**Note:** If you just want to browse and use the app, please use the [Live Demo](https://trophyd-nmdjsywdy-davidvilaa-s-projects.vercel.app/es). The following instructions are strictly for developers looking to run the project locally or contribute.
+> ❗**Note:** If you just want to browse and use the app, please use the [Live Demo](https://trophyd.vercel.app). The following instructions are strictly for developers looking to run the project locally or contribute.
 
 The following instructions are for developers looking to contribute).*
 The project is ready to run in local Node.js environments. Active Supabase and IGDB credentials are required.

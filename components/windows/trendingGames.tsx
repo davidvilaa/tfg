@@ -154,7 +154,7 @@ export default function TrendingGamesWindow() {
       <div 
         ref={windowRef} 
         className="window glass active" 
-        style={{ width: "600px", position: "absolute", left: "calc(48.5vw - 300px)", top: "420px", zIndex: 11 }}
+        style={{ width: "600px", position: "absolute", left: "calc(48.5vw - 300px)", top: "520px", zIndex: 11 }}
       >
         <div className="title-bar" style={{ cursor: "grab" }}>
           <div className="title-bar-text" style={{ display: "flex", alignItems: "center", gap: "5px" }}>

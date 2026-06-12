@@ -91,7 +91,7 @@ export default function PlayingNow() {
         <div 
           ref={windowRef} 
           className="window glass active" 
-          style={{ width: "450px", position: "absolute", right: "50px", top: "50px", zIndex: 10 }}
+          style={{ width: "450px", position: "absolute", right: "100px", top: "180px", zIndex: 10 }}
         >
           <div className="title-bar" style={{ cursor: "grab" }}>
             <div className="title-bar-text" style={{ display: "flex", alignItems: "center", gap: "5px" }}>

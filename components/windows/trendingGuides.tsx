@@ -157,7 +157,7 @@ export default function TrendingWindow() {
       <div 
         ref={windowRef} 
         className="window glass active" 
-        style={{ width: "600px", position: "absolute", left: "calc(48.5vw - 300px)", top: "50px", zIndex: 10 }}
+        style={{ width: "600px", position: "absolute", left: "calc(48.5vw - 400px)", top: "150px", zIndex: 10 }}
       >
         <div className="title-bar" style={{ cursor: "grab" }}>
           <div className="title-bar-text" style={{ display: "flex", alignItems: "center", gap: "5px" }}>

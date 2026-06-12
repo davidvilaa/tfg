@@ -3,7 +3,7 @@
 # 🏆 TrophyD: The Completionist Social Network
 
 <p align="center">
-  <a href="https://trophyd-nmdjsywdy-davidvilaa-s-projects.vercel.app/es" target="_blank"><img src="https://img.shields.io/badge/Launch_App-Live_Demo-FF4500?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"></a>
+  <a href="trophyd.vercel.app" target="_blank"><img src="https://img.shields.io/badge/Launch_App-Live_Demo-FF4500?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"></a>
   <img src="https://img.shields.io/badge/Framework-Next.js%2015-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js">
   <img src="https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase">
 </p>

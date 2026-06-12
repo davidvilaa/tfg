@@ -96,10 +96,10 @@ export default function WelcomeLanding() {
             padding: "8px 0",
           }}>
             {[
-              { color: "#0044aa", label: "Usuarios", value: stats.users },
-              { color: "#22c55e", label: "Juegos", value: stats.games },
-              { color: "#f97316", label: "Guías", value: stats.guides },
-              { color: "#a855f7", label: "Logs", value: stats.logs }
+              { color: "#0044aa", label: t("s_users"), value: stats.users },
+              { color: "#22c55e", label: t("s_games"), value: stats.games },
+              { color: "#f97316", label: t("s_guides"), value: stats.guides },
+              { color: "#a855f7", label: t("s_logs"), value: stats.logs }
             ].map((stat, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <div style={{ 

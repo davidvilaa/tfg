@@ -8,7 +8,11 @@
     "feature_2_title": "Alardea de tus Trofeos",
     "feature_2": "Registra tus juegos completados al 100%, ponles nota, escribe reseñas y conecta con otros cazadores de trofeos. Descubre a qué están jugando tus amigos, crea tu lista de pendientes y presume de tus hazañas más difíciles ante la comunidad.",
     "feature_3_title": "Conviértete en Leyenda",
-    "feature_3": "Ayuda a otros a exprimir sus juegos al máximo creando guías detalladas y listas de tareas paso a paso checklists. Únete a nosotros y juntos construiremos la biblioteca definitiva para la comunidad completionista."
+    "feature_3": "Ayuda a otros a exprimir sus juegos al máximo creando guías detalladas y listas de tareas paso a paso checklists. Únete a nosotros y juntos construiremos la biblioteca definitiva para la comunidad completionista.",
+    "s_users": "Usuarios",
+    "s_games": "Juegos",
+    "s_guides": "Guías",
+    "s_logs": "Logs"
   },
   "Home": {
     "title": "Bienvenido a TrophyD",

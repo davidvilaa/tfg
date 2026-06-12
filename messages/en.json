@@ -8,7 +8,11 @@
     "feature_2_title": "Show Off Your Trophies",
     "feature_2": "Log your 100% completed games, rate them, write reviews, and connect with other trophy hunters. Discover what your friends are playing, build your backlog, and show off your hardest achievements to the community.",
     "feature_3_title": "Become a Legend",
-    "feature_3": "Help others get the most out of their games by creating detailed guides and step-by-step checklists. Join us and together we will build the ultimate library for the completionist community."
+    "feature_3": "Help others get the most out of their games by creating detailed guides and step-by-step checklists. Join us and together we will build the ultimate library for the completionist community.",
+    "s_users": "Users",
+    "s_games": "Games",
+    "s_guides": "Guides",
+    "s_logs": "Logs"
   },
   "Home": {
     "title": "Welcome to TrophyD",

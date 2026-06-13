@@ -82,7 +82,6 @@ export default function RegisterPage() {
 
         .form-row {
           display: grid;
-          /* 65px para que quepa "Usuario:" sin estirar todo */
           grid-template-columns: 65px 1fr; 
           align-items: center;
           gap: 10px;

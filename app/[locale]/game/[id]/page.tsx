@@ -12,6 +12,7 @@ import { View } from "@react-three/drei";
 import { useNotification } from "@/components/NotificationProvider";
 import GuideCaseCard from "@/components/cards/guideCard";
 import { useTranslations } from "next-intl";
+import ReviewBubble from "@/components/game/reviewBubble";
 
 export default function GamePage() {
   const params = useParams();
@@ -192,6 +193,7 @@ export default function GamePage() {
           .from("user_games")
           .select(`
             rating,
+            review,
             profiles!user_id (
               id,
               nickname,
@@ -470,7 +472,14 @@ export default function GamePage() {
                     key={index} 
                     className="window user-card"
                     onClick={() => router.push(`/profile/${vote.profiles.nickname}`)}
+                    style={{ position: "relative" }}
                   >
+                    {vote.review && (
+                      <div style={{ position: "absolute", top: "-6px", right: "-6px", zIndex: 40 }}>
+                        <ReviewBubble reviewText={vote.review} />
+                      </div>
+                    )}
+
                     <div className="window-body" style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "12px", margin: 0 }}>
                       
                       <div 

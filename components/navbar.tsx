@@ -6,6 +6,7 @@ import { useRouter, usePathname, useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Trophy, User, Settings, LogOut, ChevronDown } from "lucide-react";
 import { useTranslations } from 'next-intl';
+import NotificationBell from "@/components/notificationBell";
 
 export default function Navbar() {
   const router = useRouter();
@@ -158,15 +159,12 @@ export default function Navbar() {
                 gap: "6px",
                 zIndex: 100
               }}>
-                
                 <button type="button" onClick={() => changeLanguage('es')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
                   <span className="fi fi-es" style={{ borderRadius: "2px" }}></span> Español
                 </button>
-
                 <button type="button" onClick={() => changeLanguage('en')} style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "8px" }}>
                   <span className="fi fi-gb" style={{ borderRadius: "2px" }}></span> English
                 </button>
-
               </div>
             )}
           </div>
@@ -208,8 +206,7 @@ export default function Navbar() {
               </Link>
             </section>
           ) : (
-            <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-              
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <form className="searchbox" onSubmit={ejecutarBusqueda} style={{ display: "flex", height: "28px", minWidth: "250px" }}>
                 <input 
                   type="search" 
@@ -285,6 +282,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
+              <NotificationBell currentUserId={user.id} />
             </div>
           )}
         </div>

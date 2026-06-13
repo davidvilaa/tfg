@@ -26,6 +26,12 @@
     "settings": "Settings",
     "logout": "Logout"
   },
+  "Notifications":{
+    "no_notifications": "You have no new notifications",
+    "like": "liked your guide",
+    "follow": "started following you",
+    "comment": "commented your guide"
+  },
   "Login":{
     "title": "Login - Trophyd",
     "label_email": "Email",

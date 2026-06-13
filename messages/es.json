@@ -26,6 +26,12 @@
     "settings": "Ajustes",
     "logout": "Salir"
   },
+  "Notifications":{
+    "no_notifications": "No tienes notificaciones nuevas",
+    "like": "le ha dado like a tu guía",
+    "follow": "ha empezado a seguirte",
+    "comment": "ha comentado en tu guía"
+  },
   "Login":{
     "title": "Iniciar Sesión - Trophyd",
     "label_email": "Correo",

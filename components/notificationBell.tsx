@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { Bell } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function NotificationBell({ currentUserId }: { currentUserId: string }) {
   const [notifications, setNotifications] = useState<any[]>([]);
@@ -11,6 +12,8 @@ export default function NotificationBell({ currentUserId }: { currentUserId: str
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  const t = useTranslations("Notifications")
 
   useEffect(() => {
     if (!currentUserId) return;
@@ -118,7 +121,7 @@ export default function NotificationBell({ currentUserId }: { currentUserId: str
         }}>
           {notifications.length === 0 ? (
             <div style={{ padding: "10px", textAlign: "center", color: "#444", fontSize: "13px", fontWeight: "bold" }}>
-              No tienes notificaciones nuevas.
+              {t("no_notifications")}
             </div>
           ) : (
             notifications.map((n) => (
@@ -145,11 +148,11 @@ export default function NotificationBell({ currentUserId }: { currentUserId: str
                 <div style={{ fontSize: "12px", color: "#000", lineHeight: "1.3" }}>
                   <span style={{ fontWeight: "bold", color: "#0044aa" }}>{n.actor?.nickname} </span>
                   
-                  {n.type === 'like' && "le ha dado like a tu guía."}
-                  {n.type === 'follow' && "ha empezado a seguirte."}
+                  {n.type === 'like' && t("like")}
+                  {n.type === 'follow' && t("follow")}
                   {n.type === 'comment' && (
                     <span>
-                      ha comentado en tu guía: <br/>
+                      {t("comment")} <br/>
                       <span style={{ fontStyle: "italic", color: "#444" }}>"{n.content_preview}"</span>
                     </span>
                   )}

@@ -144,7 +144,7 @@ export default function WelcomeLanding() {
               <img src="https://github.com/user-attachments/assets/08f8d2b3-d378-41f0-8a23-3aed45a8dba0" alt="Experiencia 3D Inmersiva" style={{ width: "100%", display: "block" }} />
             </div>
             <div style={{ flex: "1 1 450px" }}>
-              <h3 style={{ fontSize: "1.8rem", marginBottom: "15px", color: "#0044aa", fontWeight: "bold" }}>🎮 {t("feature_1_title")}</h3>
+              <h3 style={{ fontSize: "1.8rem", marginBottom: "15px", color: "#0044aa", fontWeight: "bold"}}>{t("feature_1_title")}</h3>
               <p style={{ fontSize: "1.1rem", lineHeight: "1.6", color: "#333" }}>
                 {t("feature_1")}
               </p>
@@ -153,7 +153,7 @@ export default function WelcomeLanding() {
 
           <div style={{ display: "flex", alignItems: "center", gap: "50px", marginBottom: "90px", flexWrap: "wrap-reverse" }}>
             <div style={{ flex: "1 1 450px" }}>
-              <h3 style={{ fontSize: "1.8rem", marginBottom: "15px", color: "#0044aa", fontWeight: "bold" }}>🌍{t("feature_2_title")}</h3>
+              <h3 style={{ fontSize: "1.8rem", marginBottom: "15px", color: "#0044aa", fontWeight: "bold" }}>{t("feature_2_title")}</h3>
               <p style={{ fontSize: "1.1rem", lineHeight: "1.6", color: "#333" }}>
                 {t("feature_2")}
               </p>
@@ -168,7 +168,7 @@ export default function WelcomeLanding() {
               <img src="https://github.com/user-attachments/assets/710e2d54-599e-42c2-899e-278e137acbc5" alt="Colaboración Total" style={{ width: "100%", display: "block" }} />
             </div>
             <div style={{ flex: "1 1 450px" }}>
-              <h3 style={{ fontSize: "1.8rem", marginBottom: "15px", color: "#0044aa", fontWeight: "bold" }}>🤝 {t("feature_3_title")}</h3>
+              <h3 style={{ fontSize: "1.8rem", marginBottom: "15px", color: "#0044aa", fontWeight: "bold" }}> {t("feature_3_title")}</h3>
               <p style={{ fontSize: "1.1rem", lineHeight: "1.6", color: "#333" }}>
                 {t("feature_3")}
               </p>

@@ -190,7 +190,15 @@
     "section_back": "Volver al Juego",
     "label_progress": "Progreso",
     "label_tareas": "Tareas",
-    "by": "por"
+    "by": "por",
+    "comments_title": "Comentarios",
+    "btn_post_comment": "Publicar",
+    "login_to_comment": "Inicia sesión para unirte a la conversación.",
+    "no_comments_yet": "Todavía no hay comentarios. ¡Sé el primero en compartir tu opinión!",
+    "write_placeholder": "Escribe un comentario...",
+    "btn_reply": "Responder",
+    "cancel": "Cancelar",
+    "reply_placeholder": "Escribe una respuesta..."
   },
   "Window - Feed": {
     "title": "Actividad",

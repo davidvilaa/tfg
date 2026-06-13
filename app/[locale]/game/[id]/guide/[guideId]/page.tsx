@@ -10,6 +10,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import { ArrowLeft, Clock, Dumbbell, Award, CheckSquare, Square } from "lucide-react";
 import { useNotification } from "@/components/NotificationProvider";
 import { useTranslations } from "next-intl";
+import GuideComments from "@/components/guide/guideComments";
 
 export default function GuideReadingPage() {
   const params = useParams();
@@ -19,6 +20,7 @@ export default function GuideReadingPage() {
 
   const [loading, setLoading] = useState(true);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [currentUserProfile, setCurrentUserProfile] = useState<any>(null);
   const [gameData, setGameData] = useState<any>({ title: "...", banner_url: "" });
   const [guideData, setGuideData] = useState<any>(null);
   const [sections, setSections] = useState<any[]>([]);
@@ -30,11 +32,10 @@ export default function GuideReadingPage() {
   const [isTogglingLike, setIsTogglingLike] = useState(false);
 
   const { showNotification } = useNotification();
-
   const t = useTranslations("Guide - View");
 
   const sanitizeSchema = {
-    tagNames: ['u', 'br', 'strong', 'em', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'img', 'a'],
+    tagNames: ['u', 'br', 'strong', 'em', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'img', 'a', 'code', 'pre', 'blockquote'],
     attributes: {
       'a': ['href', 'title', 'target'],
       'img': ['src', 'alt', 'title', 'width', 'height']
@@ -51,7 +52,11 @@ export default function GuideReadingPage() {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         let userId = session?.user?.id || null;
-        if (userId) setCurrentUserId(userId);
+        if (userId) {
+          setCurrentUserId(userId);
+          const { data: profile } = await supabase.from("profiles").select("*").eq("id", userId).single();
+          if (profile) setCurrentUserProfile(profile);
+        }
 
         const res = await fetch(`/api/igdb/game?id=${gameId}`);
         if (res.ok) setGameData(await res.json());
@@ -98,7 +103,7 @@ export default function GuideReadingPage() {
             .eq("user_id", userId)
             .maybeSingle();
 
-          if (likeErr) throw likeErr;
+          if (likeErr && likeErr.code !== 'PGRST116') throw likeErr;
           if (likeData) setIsLiked(true);
         }
 
@@ -224,16 +229,20 @@ export default function GuideReadingPage() {
               box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.05) !important;
               outline: none !important;
             }
-            [role="menubar"] {
-              padding: 2px 2px 0 2px !important;
+            [role="menubar"] { padding: 2px 2px 0 2px !important; }
+            [role="menuitem"] { padding: 6px 12px !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; margin: 0 1px !important; }
+            @keyframes w7-shine {
+              0% { left: -100%; filter: brightness(1); }
+              50% { filter: brightness(1.3); }
+              100% { left: 200%; filter: brightness(1); }
             }
-            [role="menuitem"] {
-              padding: 6px 12px !important;
-              display: flex !important;
-              align-items: center !important;
-              justify-content: center !important;
-              cursor: pointer !important;
-              margin: 0 1px !important;
+            .animated-bar > div {
+              transition: width 0.4s ease-out !important; position: relative; overflow: hidden;
+            }
+            .animated-bar > div::after {
+              content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+              background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+              animation: w7-shine 2s infinite linear;
             }
           `}</style>
 
@@ -270,7 +279,6 @@ export default function GuideReadingPage() {
           <div className="window-body" style={{ minHeight: "600px", padding: "30px", backgroundColor: "#fff", display: "flex", flexDirection: "column", gap: "20px", marginTop: 0 }}>
             
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", paddingBottom: "10px" }}>
-              
               <div style={{ display: "flex", gap: "15px" }}>
                 <div style={getRetroBadgeStyle(getDifficultyColor(guideData.average_difficulty))}>
                   <Dumbbell size={18} style={{ filter: "drop-shadow(0 1px 1px rgba(0,0,0,0.8))", strokeWidth: 2.5 }} /> 
@@ -286,30 +294,6 @@ export default function GuideReadingPage() {
               {totalChecks > 0 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                   <span style={{ fontSize: "13px", fontWeight: "bold", color: "#64748b" }}>{t("label_progress")}: {progressPercent}%</span>
-                  
-                  <style>{`
-                    @keyframes w7-shine {
-                      0% { left: -100%; filter: brightness(1); }
-                      50% { filter: brightness(1.3); }
-                      100% { left: 200%; filter: brightness(1); }
-                    }
-                    .animated-bar > div {
-                      transition: width 0.4s ease-out !important;
-                      position: relative;
-                      overflow: hidden;
-                    }
-                    .animated-bar > div::after {
-                      content: "";
-                      position: absolute;
-                      top: 0; 
-                      left: -100%; 
-                      width: 100%; 
-                      height: 100%;
-                      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-                      animation: w7-shine 2s infinite linear;
-                    }
-                  `}</style>
-
                   <div role="progressbar" className="animated-bar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progressPercent} style={{ width: "150px", margin: 0 }}>
                     <div style={{ width: `${progressPercent}%` }}></div>
                   </div>
@@ -347,22 +331,16 @@ export default function GuideReadingPage() {
                       {!isCollapsed && (
                         <div className="window-body" style={{ margin: 0, padding: "20px", backgroundColor: "#fff", display: "flex", flexDirection: "column", gap: "15px" }}>
                           {sec.text && (
-                            <div style={{ fontSize: "15px", lineHeight: "1.6", color: "#334155" }}>
+                            <div className="markdown-content" style={{ fontSize: "15px", lineHeight: "1.6", color: "#334155" }}>
                               <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}>{sec.text}</ReactMarkdown>
                             </div>
                           )}
 
                           {sec.checklist && sec.checklist.length > 0 && (
                             <div style={{ 
-                              margin: "5px -20px -20px -20px", 
-                              backgroundColor: "#f8fafc", 
-                              borderTop: "1px solid #e2e8f0", 
-                              padding: "15px 20px", 
-                              display: "flex", 
-                              flexDirection: "column", 
-                              gap: "10px",
-                              borderBottomLeftRadius: "3px",
-                              borderBottomRightRadius: "3px"
+                              margin: "5px -20px -20px -20px", backgroundColor: "#f8fafc", borderTop: "1px solid #e2e8f0", 
+                              padding: "15px 20px", display: "flex", flexDirection: "column", gap: "10px",
+                              borderBottomLeftRadius: "3px", borderBottomRightRadius: "3px"
                             }}>
                               <div style={{ fontWeight: "bold", fontSize: "13px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.5px", display: "flex", alignItems: "center", gap: "5px" }}>
                                 <Award size={14} /> {t("label_tareas")}
@@ -397,11 +375,16 @@ export default function GuideReadingPage() {
                   );
                 })
               )}
-            </div>
+            </div>            
             <hr style={{ width: "100%", border: "none", borderBottom: "1px solid #e5e7eb", marginTop: "20px" }} />        
             <div style={{ textAlign: "center", fontSize: "14px", color: "#64748b", paddingBottom: "10px" }}>
               {t("by")} <span style={{ color: "#3b82f6", fontWeight: "bold"}}>{guideData.profiles?.nickname}</span>
             </div>
+            <GuideComments 
+              guideId={guideId} 
+              currentUserId={currentUserId} 
+              currentUserProfile={currentUserProfile} 
+            />
           </div>
         </div>
       </div>

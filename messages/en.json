@@ -190,7 +190,15 @@
     "section_back": "Back to Game",
     "label_progress": "Progress",
     "label_tareas": "Tasks",
-    "by": "by"
+    "by": "by",
+    "comments_title": "Comments",
+    "btn_post_comment": "Post",
+    "login_to_comment": "Log in to join the conversation.",
+    "no_comments_yet": "No comments yet. Be the first to share your thoughts!",
+    "write_placeholder": "Write a comment...",
+    "btn_reply": "Reply",
+    "cancel": "Cancel",
+    "reply_placeholder": "Write a reply..."
   },
   "Window - Feed":{
     "title": "Activity",

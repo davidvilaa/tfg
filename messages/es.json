@@ -146,7 +146,8 @@
     "section_following": "Siguiendo",
     "btn_following_follow": "Seguir",
     "btn_following_unfollow": "Dejar de seguir",
-    "btn_following_empty": "Este usuario aún no sigue a ningún usuario"
+    "btn_following_empty": "Este usuario aún no sigue a ningún usuario",
+    "alert_remove_follower": "¿Seguro que quieres eliminar a este usuario de tus seguidores?"
   },
   "Game":{
     "info_loading": "Cargando información del juego...",

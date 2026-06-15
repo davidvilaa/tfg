@@ -301,6 +301,9 @@ function Model({ url, coverUrl, hovered, consola, isFocused, isLogging, juego, u
     meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetPosY, 0.04);
   });
 
+  const today = new Date().toISOString().split("T")[0];
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
+
   const handleGuardarEnBBDD = async () => {
     if (!userId || !juego) {
       alert("Error: Faltan datos del usuario o del juego.");
@@ -424,7 +427,17 @@ function Model({ url, coverUrl, hovered, consola, isFocused, isLogging, juego, u
                   
                   <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                     <label>Dificultad:</label>
-                    <input type="number" min="0" max="10" value={difficulty} onChange={(e) => setDifficulty(Number(e.target.value))} style={{ width: "40px" }} />
+                    <input 
+                      type="number" min="0" max="10" 
+                      value={difficulty} 
+                      onChange={(e) => {
+                        let val = Number(e.target.value);
+                        if (val < 0) val = 0;
+                        if (val > 10) val = 10;
+                        setDifficulty(val);
+                      }} 
+                      style={{ width: "40px" }} 
+                    />
                   </div>
 
                   <div style={{ display: "flex", alignItems: "center", gap: "2px" }}>
@@ -474,7 +487,17 @@ function Model({ url, coverUrl, hovered, consola, isFocused, isLogging, juego, u
 
                   <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                     <label>Horas:</label>
-                    <input type="number" min="0" value={timePlayed} onChange={(e) => setTimePlayed(Number(e.target.value))} style={{ width: "50px" }} />
+                    <input 
+                      type="number" min="0" max="100000" 
+                      value={timePlayed} 
+                      onChange={(e) => {
+                        let val = Number(e.target.value);
+                        if (val < 0) val = 0;
+                        if (val > 100000) val = 100000;
+                        setTimePlayed(val);
+                      }} 
+                      style={{ width: "50px" }} 
+                    />
                   </div>
 
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -505,6 +528,8 @@ function Model({ url, coverUrl, hovered, consola, isFocused, isLogging, juego, u
                     <label style={{color: "#333" }}>Inicio:</label>
                     <input 
                       type="date" 
+                      min="1950-01-01"
+                      max={today}
                       value={startDate} onChange={(e) => setStartDate(e.target.value)}
                       style={{ 
                         fontFamily: "inherit",
@@ -521,7 +546,10 @@ function Model({ url, coverUrl, hovered, consola, isFocused, isLogging, juego, u
                   <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <label style={{color: "#333" }}>Fin:</label>
                     <input 
-                      type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)}
+                      type="date" 
+                      min="1950-01-01"
+                      max={tomorrow}
+                      value={endDate} onChange={(e) => setEndDate(e.target.value)}
                       style={{ 
                         fontFamily: "inherit",
                         padding: "4px 8px",

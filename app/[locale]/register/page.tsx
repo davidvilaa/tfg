@@ -26,7 +26,18 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    
+    const { data: existingUser } = await supabase
+      .from('profiles')
+      .select('nickname')
+      .ilike('nickname', username)
+      .maybeSingle();
 
+    if (existingUser) {
+      setError(t('error_username_taken') || "That username is already taken.");
+      setLoading(false);
+      return;
+    }
     const { data, error: authError } = await supabase.auth.signUp({
       email,
       password,

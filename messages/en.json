@@ -54,7 +54,8 @@
     "btn_registrarse_loading": "Creating Account...",
     "si_ya_tienes_cuenta": "if you already have an account",
     "btn_si_ya_tienes_cuenta": "Login",
-    "error_incorrect_credentials": "The account was created, but there was an error saving the username"
+    "error_incorrect_credentials": "The account was created, but there was an error saving the username",
+    "error_username_taken": "That username is already taken."
   },
   "Settings":{
     "title": "Settings - Trophyd",

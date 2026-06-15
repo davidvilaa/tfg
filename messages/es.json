@@ -54,7 +54,8 @@
     "btn_registrarse_loading": "Creando Cuenta...",
     "si_ya_tienes_cuenta": "si ya tienes cuenta",
     "btn_si_ya_tienes_cuenta": "Iniciar sesión",
-    "error_incorrect_credentials": "La cuenta se creó, pero hubo un error al guardar el nombre de usuario"
+    "error_incorrect_credentials": "La cuenta se creó, pero hubo un error al guardar el nombre de usuario",
+    "error_username_taken": "Ese nombre de usuario ya está en uso."
   },
   "Settings":{
     "title": "Ajustes - Trophyd",

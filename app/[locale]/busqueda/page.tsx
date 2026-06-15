@@ -154,7 +154,7 @@ export default function BusquedaPage() {
   return (
     <main ref={mainRef} style={{ padding: "100px 20px 40px", minHeight: "100vh", position: "relative" }}>
 
-      <div style={{ maxWidth: "1100px", margin: "0 auto", marginBottom: "30px", position: "relative", zIndex: 9999 }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", marginBottom: "30px", position: "relative", zIndex: 10 }}>
         <style>{`
           .tab-activa,
           [role="menubar"] [role="menuitem"]:hover,

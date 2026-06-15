@@ -168,32 +168,26 @@ export default function GamePage() {
         const { data: { session } } = await supabase.auth.getSession();
         const user = session?.user;
         
-        if (!user) {
-          return;
+        let idsToFetch = [];
+        
+        if (user) {
+          const { data: follows } = await supabase
+            .from("follows")
+            .select("following_id")
+            .eq("follower_id", user.id);
+          
+          if (follows) {
+            idsToFetch = follows.map(f => f.following_id);
+          }
+          idsToFetch.push(user.id);
         }
-
-        const { data: follows, error: followError } = await supabase
-          .from("follows")
-          .select("following_id")
-          .eq("follower_id", user.id);
-
-        if (followError) {
-          console.error("Error en tabla follows:", followError.message);
-          return;
-        }
-
-        if (!follows || follows.length === 0) {
-          setFollowingVotes([]);
-          return;
-        }
-
-        const followingIds = follows.map(f => f.following_id);
 
         const { data: votes, error: voteError } = await supabase
           .from("user_games")
           .select(`
             rating,
             review,
+            user_id,
             profiles!user_id (
               id,
               nickname,
@@ -201,17 +195,17 @@ export default function GamePage() {
             )
           `)
           .eq("game_id", Number(gameId)) 
-          .in("user_id", followingIds);
+          .in("user_id", idsToFetch);
 
         if (voteError) {
-          console.error("Error en query user_games:", voteError.message);
+          console.error("Error obteniendo votos:", voteError.message);
           return;
         }
 
         setFollowingVotes(votes || []);
 
       } catch (error: any) {
-        console.error("Error en Following:", error.message || error);
+        console.error("Error en Fetching Votes:", error);
       }
     };
 
